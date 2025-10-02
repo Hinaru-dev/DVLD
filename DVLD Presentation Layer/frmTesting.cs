@@ -16,5 +16,15 @@ namespace DVLD_Presentation_Layer
         {
             InitializeComponent();
         }
+
+        private void btnFind_Click(object sender, EventArgs e)
+        {
+            if (rbUserID.Checked)
+                ctrlUserCard1.LoadUserInfo(int.Parse(tbInput.Text));
+            
+            else // which means rbUsername is Checked	
+                ctrlUserCard1.LoadUserInfo(tbInput.Text);
+
+        }
     }
 }

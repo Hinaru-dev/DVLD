@@ -44,6 +44,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\ctrlPersonCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ctrlPersonCard.Designer.cs">
+      <DependentUpon>ctrlPersonCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ctrlPersonCardWithFilter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ctrlPersonCardWithFilter.Designer.cs">
+      <DependentUpon>ctrlPersonCardWithFilter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ctrlUserCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ctrlUserCard.Designer.cs">
+      <DependentUpon>ctrlUserCard.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -58,22 +76,32 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Controls\ctrlPersonCard.resx">
+      <DependentUpon>ctrlPersonCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ctrlPersonCardWithFilter.resx">
+      <DependentUpon>ctrlPersonCardWithFilter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ctrlUserCard.resx">
+      <DependentUpon>ctrlUserCard.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmTesting.resx">
       <DependentUpon>frmTesting.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -88,6 +116,81 @@
       <Project>{6ac8d321-1d01-4f3d-9a5b-a9a4bd8459d6}</Project>
       <Name>DVLD Business Logic</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PersonCardElements\personMan.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PersonCardElements\genders.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PersonCardElements\mailAddress.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PersonCardElements\calendarDay.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PersonCardElements\worldAfrica.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PersonCardElements\homework.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PersonCardElements\phone.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PersonCardElements\NationalNo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Persons\manBan.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Persons\manEdit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Persons\manInfo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Persons\manLocation.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Persons\manLock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Persons\manMinus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Persons\manPlus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Persons\manQuestion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Persons\manSave.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Persons\manSearch.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Persons\manSettings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Persons\manStar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Persons\manTime.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Persons\manUnlock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Persons\womanQuestion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PersonCardElements\female.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PersonCardElements\male.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

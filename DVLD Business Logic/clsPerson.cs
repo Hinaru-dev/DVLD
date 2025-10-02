@@ -47,7 +47,7 @@ namespace DVLD_Business_Logic
             ImagePath   = string.Empty;
         }
 
-        clsPerson(int PersonID, string NationalNo, string FirstName, string SecondName, string ThirdName, string lastName, DateTime DateOfBirth, char Gender, string address, string Phone, string Email, int NationalityCountryID, string ImagePath)
+        clsPerson(int PersonID, string NationalNo, string FirstName, string SecondName, string ThirdName, string lastName, DateTime DateOfBirth, char Gender, string Address, string Phone, string Email, int NationalityCountryID, string ImagePath)
         {
             this.PersonID = PersonID;
             this.NationalNo = NationalNo;
@@ -78,7 +78,7 @@ namespace DVLD_Business_Logic
 
         public static clsPerson Find(int PersonID)
         {
-            string NationalNo = "", FirstName = "", SecondName = "", ThirdName = "", LastName = "",Address = "", Phone = "", Email = "", ImagePath = "";
+            string NationalNo = "", FirstName = "", SecondName = "", ThirdName = "", LastName = "", Address = "", Phone = "", Email = "", ImagePath = "";
             DateTime DateOfBirth = DateTime.Now;
             char Gender = '\0';
             int NationalityCountryID = -1;
@@ -105,7 +105,7 @@ namespace DVLD_Business_Logic
 
             bool isFound = clsPersonData.GetPersonInfoByNationalNo(NationalNo, ref PersonID, ref FirstName, ref SecondName, ref ThirdName, ref LastName, ref DateOfBirth, ref Gender, ref Address, ref Phone, ref Email, ref NationalityCountryID, ref ImagePath);
 
-
+            
             if (isFound)
                 return new clsPerson(PersonID, NationalNo, FirstName, SecondName, ThirdName, LastName, DateOfBirth, Gender, Address, Phone, Email, NationalityCountryID, ImagePath);
 
