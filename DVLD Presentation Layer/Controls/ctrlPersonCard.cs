@@ -53,8 +53,8 @@ namespace DVLD_Presentation_Layer.Controls
 
         private void _FillPersonInfo()
         {
-
             _PersonID = _Person.PersonID;
+         
             lblPersonID.Text = _Person.PersonID.ToString();
             lblName.Text = _Person.FullName();
             lblNationalNo.Text = _Person.NationalNo;
@@ -75,12 +75,7 @@ namespace DVLD_Presentation_Layer.Controls
             lblDateOfBirth.Text = _Person.DateOfBirth.ToShortDateString();
             lblPhone.Text = _Person.Phone;
 
-            //
-            // needs a refactor to grab
-            // country name from clsCountry
-            // i haven't made cls Country it yet
-            // 
-            lblCountry.Text = _Person.NationalityCountryID.ToString();
+            lblCountry.Text = clsCountry.Find(_Person.NationalityCountryID).CountryName;
 
             // set a default person photo before checking if there is a picture or not
                 pbPersonPhoto.Image = Properties.Resources.personMan;
