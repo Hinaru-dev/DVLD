@@ -1,0 +1,107 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using DVLD_Business_Logic;
+
+namespace DVLD_Presentation_Layer
+{
+    public partial class frmManagePeople : Form
+    {
+        private enum enFilter { None = -1, personid=0, nationalno=1, firstname=2, secondname=3, thirdname=4, lastname=5, nationality=6, gendor=7, phone=8, email=9 };
+        
+        public frmManagePeople()
+        {
+            InitializeComponent();
+        }
+
+        private void frmManagePeople_Load(object sender, EventArgs e)
+        {
+            // filling people list
+            dgvPeopleList.DataSource = clsPerson.getAllPeople();
+
+            UpdateRecordsCount();
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
+        }
+
+        private void btnAddPerson_Click(object sender, EventArgs e)
+        {
+            // code to open add new person window
+            // will be written here
+        }
+
+        private void cbFilter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbFilter.SelectedItem.ToString() == "None")
+                tbFilter.Visible = false;
+            else
+                tbFilter.Visible = true;
+        }
+
+        private void tbFilter_TextChanged(object sender, EventArgs e)
+        {
+            BindingSource bs = new BindingSource();
+            bs.DataSource = dgvPeopleList.DataSource;
+
+            if (tbFilter.Text == "")
+            {
+                bs.Filter = string.Empty;
+                dgvPeopleList.DataSource = bs.DataSource;
+            }
+
+            else
+            {
+                enFilter ColumnIndex = (enFilter)(cbFilter.SelectedIndex - 1);
+
+                // if this column value is numerical:
+                if (ColumnIndex == enFilter.personid || ColumnIndex == enFilter.gendor)
+                    bs.Filter = ColumnIndex.ToString() + " = " + tbFilter.Text;
+
+                // else if its string:
+                else
+                    bs.Filter = ColumnIndex.ToString() + " Like '%" + tbFilter.Text + "%'";
+
+                dgvPeopleList.DataSource = bs.DataSource;
+            }
+
+            OnPeopleListUpdated();
+        }
+
+        private void tbFilter_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            enFilter ColumnIndex = (enFilter)(cbFilter.SelectedIndex - 1);
+            
+            // if this column value is numerical:
+            if (ColumnIndex == enFilter.personid || ColumnIndex == enFilter.gendor)
+            {
+                if (!char.IsNumber(e.KeyChar) && !char.IsControl(e.KeyChar))
+                {
+                    e.Handled = true;
+                }
+            }
+        }
+
+        // --------------------
+        //   custom functions 
+        // --------------------
+
+        private void UpdateRecordsCount()
+        {
+            lblRecordsCount.Text = dgvPeopleList.Rows.Count.ToString();
+        }
+
+        private void OnPeopleListUpdated()
+        {
+            UpdateRecordsCount();
+        }
+    }
+}

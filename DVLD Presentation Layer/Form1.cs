@@ -16,5 +16,12 @@ namespace DVLD_Presentation_Layer
         {
             InitializeComponent();
         }
+
+        private void tsmiPeople_Click(object sender, EventArgs e)
+        {
+            Form frmManagePeople1 = new frmManagePeople();
+            frmManagePeople1.ShowDialog();
+        }
+
     }
 }

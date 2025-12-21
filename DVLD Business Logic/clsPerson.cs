@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DVLD_Data_Access;
+using System.Data;
 
 namespace DVLD_Business_Logic
 {
@@ -132,6 +133,11 @@ namespace DVLD_Business_Logic
                 default:
                     return false;
 	        }
+        }
+
+        public static DataTable getAllPeople()
+        {
+            return clsPersonData.GetAllPeople();
         }
     }
 }
