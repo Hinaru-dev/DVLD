@@ -103,5 +103,41 @@ namespace DVLD_Presentation_Layer
         {
             UpdateRecordsCount();
         }
+
+        // --------------------------------
+        // 
+        //  right clicked on people's list
+        //
+        // --------------------------------
+        
+        private void tsmiShowDetails_Click(object sender, EventArgs e)
+        {
+            // show details code here
+        }
+
+        private void tsmiAddNewPerson_Click(object sender, EventArgs e)
+        {
+            // add new person code here
+        }
+
+        private void tsmiEdit_Click(object sender, EventArgs e)
+        {
+            // edit person info code here
+        }
+
+        private void tsmiDelete_Click(object sender, EventArgs e)
+        {
+            // delete person code here
+        }
+
+        private void tsmiSendEmail_Click(object sender, EventArgs e)
+        {
+            // send email code here
+        }
+
+        private void tsmiPhoneCall_Click(object sender, EventArgs e)
+        {
+            // phone call selected person code here
+        }
     }
 }
