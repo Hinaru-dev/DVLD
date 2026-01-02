@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
 using DVLD_Data_Access;
 
 namespace DVLD_Business_Logic
@@ -50,6 +51,11 @@ namespace DVLD_Business_Logic
 
             else
                 return null;
+        }
+
+        public static DataTable getAllCountriesList()
+        {
+            return clsCountryData.GetAllCountries();
         }
     }
 }

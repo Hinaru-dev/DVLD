@@ -35,8 +35,7 @@ namespace DVLD_Presentation_Layer
 
         private void btnAddPerson_Click(object sender, EventArgs e)
         {
-            // code to open add new person window
-            // will be written here
+            AddNewPerson();
         }
 
         private void cbFilter_SelectedIndexChanged(object sender, EventArgs e)
@@ -94,6 +93,12 @@ namespace DVLD_Presentation_Layer
         //   custom functions 
         // --------------------
 
+        private void RefreshPeopleList()
+        {
+            // refill people's list from db
+            dgvPeopleList.DataSource = clsPerson.getAllPeople();
+        }
+        
         private void UpdateRecordsCount()
         {
             lblRecordsCount.Text = dgvPeopleList.Rows.Count.ToString();
@@ -101,7 +106,15 @@ namespace DVLD_Presentation_Layer
 
         private void OnPeopleListUpdated()
         {
+            RefreshPeopleList();
             UpdateRecordsCount();
+        }
+
+        private void AddNewPerson()
+        {
+            FrmAddEditPersonInfo frmAddEditPersonInfo = new FrmAddEditPersonInfo();
+            frmAddEditPersonInfo.Show();
+            OnPeopleListUpdated();
         }
 
         // --------------------------------

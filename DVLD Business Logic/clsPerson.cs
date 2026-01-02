@@ -10,6 +10,7 @@ namespace DVLD_Business_Logic
 {
     public class clsPerson
     {
+        enum enGender { Male = 0, Female = 1 };
         enum enMode { AddNewMode=0, UpdateMode=1 };
         enMode Mode;
 
@@ -24,7 +25,7 @@ namespace DVLD_Business_Logic
         }
         public string NationalNo { get; set; }
         public DateTime DateOfBirth { get; set; }
-        public char Gender { get; set; }
+        public byte Gender { get; set; }
         public string Address { get; set; }
         public string Phone { get; set; }
         public string Email{set; get;}
@@ -40,7 +41,7 @@ namespace DVLD_Business_Logic
             ThirdName   = string.Empty;
             LastName    = string.Empty;
             DateOfBirth = DateTime.Now;
-            Gender      = 'M';
+            Gender = (byte)enGender.Male;
             Address     = string.Empty;
             Phone       = string.Empty;
             Email       = string.Empty;
@@ -48,7 +49,7 @@ namespace DVLD_Business_Logic
             ImagePath   = string.Empty;
         }
 
-        clsPerson(int PersonID, string NationalNo, string FirstName, string SecondName, string ThirdName, string lastName, DateTime DateOfBirth, char Gender, string Address, string Phone, string Email, int NationalityCountryID, string ImagePath)
+        clsPerson(int PersonID, string NationalNo, string FirstName, string SecondName, string ThirdName, string lastName, DateTime DateOfBirth, byte Gender, string Address, string Phone, string Email, int NationalityCountryID, string ImagePath)
         {
             this.PersonID = PersonID;
             this.NationalNo = NationalNo;
@@ -81,7 +82,7 @@ namespace DVLD_Business_Logic
         {
             string NationalNo = "", FirstName = "", SecondName = "", ThirdName = "", LastName = "", Address = "", Phone = "", Email = "", ImagePath = "";
             DateTime DateOfBirth = DateTime.Now;
-            char Gender = '\0';
+            byte Gender = 0; // male=0 | female=1
             int NationalityCountryID = -1;
 
 
@@ -101,7 +102,7 @@ namespace DVLD_Business_Logic
             int PersonID = -1, NationalityCountryID = -1;
             string FirstName = "", SecondName = "", ThirdName = "", LastName = "", Address = "", Phone = "", Email = "", ImagePath = "";
             DateTime DateOfBirth = DateTime.Now;
-            char Gender = '\0';
+            byte Gender = 0;
 
 
             bool isFound = clsPersonData.GetPersonInfoByNationalNo(NationalNo, ref PersonID, ref FirstName, ref SecondName, ref ThirdName, ref LastName, ref DateOfBirth, ref Gender, ref Address, ref Phone, ref Email, ref NationalityCountryID, ref ImagePath);
@@ -138,6 +139,11 @@ namespace DVLD_Business_Logic
         public static DataTable getAllPeople()
         {
             return clsPersonData.GetAllPeople();
+        }
+
+        public static clsPerson getNewPersonObject()
+        {
+            return new clsPerson();
         }
     }
 }

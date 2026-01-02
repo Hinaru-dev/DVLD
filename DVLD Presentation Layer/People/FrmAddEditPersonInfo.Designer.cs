@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.lblPersonID = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -56,6 +57,7 @@
             this.rbFemale = new System.Windows.Forms.RadioButton();
             this.rtbAddess = new System.Windows.Forms.RichTextBox();
             this.lnklblSetImage = new System.Windows.Forms.LinkLabel();
+            this.epInputAlreadyExistsError = new System.Windows.Forms.ErrorProvider(this.components);
             this.btnClose = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.pictureBox11 = new System.Windows.Forms.PictureBox();
@@ -69,6 +71,8 @@
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.ofdPersonImage = new System.Windows.Forms.OpenFileDialog();
+            ((System.ComponentModel.ISupportInitialize)(this.epInputAlreadyExistsError)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPersonImage)).BeginInit();
@@ -249,6 +253,7 @@
             this.tbNationalNo.Name = "tbNationalNo";
             this.tbNationalNo.Size = new System.Drawing.Size(144, 22);
             this.tbNationalNo.TabIndex = 27;
+            this.tbNationalNo.Validating += new System.ComponentModel.CancelEventHandler(this.tbNationalNo_Validating);
             // 
             // tbFirstName
             // 
@@ -301,9 +306,9 @@
             this.rbMale.Name = "rbMale";
             this.rbMale.Size = new System.Drawing.Size(59, 21);
             this.rbMale.TabIndex = 35;
-            this.rbMale.TabStop = true;
             this.rbMale.Text = "Male";
             this.rbMale.UseVisualStyleBackColor = true;
+            this.rbMale.Click += new System.EventHandler(this.rbMale_Click);
             // 
             // rbFemale
             // 
@@ -315,6 +320,7 @@
             this.rbFemale.TabStop = true;
             this.rbFemale.Text = "Female";
             this.rbFemale.UseVisualStyleBackColor = true;
+            this.rbFemale.Click += new System.EventHandler(this.rbFemale_Click);
             // 
             // rtbAddess
             // 
@@ -334,6 +340,10 @@
             this.lnklblSetImage.TabStop = true;
             this.lnklblSetImage.Text = "Set Image";
             this.lnklblSetImage.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnklblSetImage_LinkClicked);
+            // 
+            // epInputAlreadyExistsError
+            // 
+            this.epInputAlreadyExistsError.ContainerControl = this;
             // 
             // btnClose
             // 
@@ -520,6 +530,8 @@
             this.Controls.Add(this.label1);
             this.Name = "FrmAddEditPersonInfo";
             this.Text = "Add / Edit Person Info";
+            this.Load += new System.EventHandler(this.FrmAddEditPersonInfo_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.epInputAlreadyExistsError)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPersonImage)).EndInit();
@@ -579,5 +591,7 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.LinkLabel lnklblSetImage;
+        private System.Windows.Forms.ErrorProvider epInputAlreadyExistsError;
+        private System.Windows.Forms.OpenFileDialog ofdPersonImage;
     }
 }

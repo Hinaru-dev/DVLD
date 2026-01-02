@@ -10,7 +10,7 @@ namespace DVLD_Data_Access
 {
     public static class clsPersonData
     {
-        public static bool GetPersonInfoByID(int PersonID, ref string NationalNo, ref string FirstName, ref string SecondName, ref string ThirdName, ref string LastName, ref DateTime DateOfBirth, ref char Gender, ref string Address, ref string Phone, ref string Email, ref int NationalityCountryID, ref string ImagePath)
+        public static bool GetPersonInfoByID(int PersonID, ref string NationalNo, ref string FirstName, ref string SecondName, ref string ThirdName, ref string LastName, ref DateTime DateOfBirth, ref byte Gender, ref string Address, ref string Phone, ref string Email, ref int NationalityCountryID, ref string ImagePath)
         {
             bool isFound = false;
 
@@ -32,18 +32,31 @@ namespace DVLD_Data_Access
                 {
                     NationalNo = reader["NationalNo"].ToString();
                     FirstName  = reader["FirstName"].ToString();
-                    SecondName = reader["SecondName"].ToString();
-                    ThirdName  = reader["ThirdName"].ToString();
                     LastName   = reader["LastName"].ToString();
                     //DateOfBirth = DateTime.Parse(reader["DateOfBirth"].ToString());
                     DateTime.TryParse(reader["DateOfBirth"].ToString(), out DateOfBirth);
                     //Gender = char.Parse(reader["Gender"].ToString());
-                    char.TryParse(reader["Gendor"].ToString(), out Gender);
+                    byte.TryParse(reader["Gendor"].ToString(), out Gender);
                     Address = reader["Address"].ToString();
                     Phone = reader["Phone"].ToString();
-                    Email = reader["Email"].ToString();
                     // NationalityCountryID = int.Parse(reader["nationalitycountryid"].ToString());
                     int.TryParse(reader["nationalitycountryid"].ToString(), out NationalityCountryID);
+
+                    if (reader["SecondName"] != System.DBNull.Value)
+                        SecondName = reader["SecondName"].ToString();
+                    else
+                        SecondName = string.Empty;
+
+                    if (reader["ThirdName"] != System.DBNull.Value)
+                        ThirdName = reader["ThirdName"].ToString();
+                    else
+                        ThirdName = string.Empty;
+
+                    if (reader["Email"] != System.DBNull.Value)
+                        Email = reader["Email"].ToString();
+                    else
+                        Email = string.Empty;
+
                     if (reader["imagePath"] != System.DBNull.Value)
                         ImagePath = reader["imagepath"].ToString();
                     else
@@ -67,7 +80,7 @@ namespace DVLD_Data_Access
             return isFound;
         }
 
-        public static bool GetPersonInfoByNationalNo(string NationalNo, ref int PersonID, ref string FirstName, ref string SecondName, ref string ThirdName, ref string LastName, ref DateTime DateOfBirth, ref char Gender, ref string Address, ref string 
+        public static bool GetPersonInfoByNationalNo(string NationalNo, ref int PersonID, ref string FirstName, ref string SecondName, ref string ThirdName, ref string LastName, ref DateTime DateOfBirth, ref byte Gender, ref string Address, ref string 
 Phone, ref string Email, ref int NationalityCountryID, ref string ImagePath)
         {
             bool isFound = false;
@@ -97,12 +110,28 @@ Phone, ref string Email, ref int NationalityCountryID, ref string ImagePath)
                     //DateOfBirth = DateTime.Parse(reader["DateOfBirth"].ToString());
                     DateTime.TryParse(reader["DateOfBirth"].ToString(), out DateOfBirth);
                     //Gender = char.Parse(reader["Gender"].ToString());
-                    char.TryParse(reader["Gendor"].ToString(), out Gender);
+                    byte.TryParse(reader["Gendor"].ToString(), out Gender);
                     Address = reader["Address"].ToString();
                     Phone = reader["Phone"].ToString();
                     Email = reader["Email"].ToString();
                     // NationalityCountryID = int.Parse(reader["nationalitycountryid"].ToString());
                     int.TryParse(reader["nationalitycountryid"].ToString(), out NationalityCountryID);
+
+                    if (reader["SecondName"] != System.DBNull.Value)
+                        SecondName = reader["SecondName"].ToString();
+                    else
+                        SecondName = string.Empty;
+
+                    if (reader["ThirdName"] != System.DBNull.Value)
+                        ThirdName = reader["ThirdName"].ToString();
+                    else
+                        ThirdName = string.Empty;
+
+                    if (reader["Email"] != System.DBNull.Value)
+                        Email = reader["Email"].ToString();
+                    else
+                        Email = string.Empty;
+                    
                     if (reader["imagePath"] != System.DBNull.Value)
                         ImagePath = reader["imagepath"].ToString();
                     else
@@ -126,7 +155,7 @@ Phone, ref string Email, ref int NationalityCountryID, ref string ImagePath)
             return isFound;
         }
         
-        public static int AddNewPerson(string FirstName, string SecondName, string ThirdName, string LastName, string NationalNo, DateTime DateOfBirth, char Gender, string Address, string Phone, string Email, int NationalityCountryID, string ImagePath)
+        public static int AddNewPerson(string FirstName, string SecondName, string ThirdName, string LastName, string NationalNo, DateTime DateOfBirth, byte Gender, string Address, string Phone, string Email, int NationalityCountryID, string ImagePath)
         {
             // -1 indicates invalide id 
             // for whatever reason (insertion failed, exception occured...etc)
@@ -141,16 +170,29 @@ Phone, ref string Email, ref int NationalityCountryID, ref string ImagePath)
             SqlCommand command = new SqlCommand(query, connection);
             command.Parameters.AddWithValue("@NationalNo", NationalNo);
             command.Parameters.AddWithValue("@FirstName", FirstName);
-            command.Parameters.AddWithValue("@SecondName", SecondName);
-            command.Parameters.AddWithValue("@ThirdName", ThirdName);
             command.Parameters.AddWithValue("@LastName", LastName);
             command.Parameters.AddWithValue("@DateOfBirth", DateOfBirth);
             command.Parameters.AddWithValue("@Gender", Gender);
             command.Parameters.AddWithValue("@Address", Address);
             command.Parameters.AddWithValue("@Phone", Phone);
-            command.Parameters.AddWithValue("@Email", Email);
             command.Parameters.AddWithValue("@NationalityCountryID", NationalityCountryID);
+
+            if (SecondName != null)
+                command.Parameters.AddWithValue("@SecondName", SecondName);
+            else
+                command.Parameters.AddWithValue("@SecondName", System.DBNull.Value);
             
+            if (ThirdName != null)
+                command.Parameters.AddWithValue("@ThirdName", ThirdName);
+            else
+                command.Parameters.AddWithValue("@ThirdName", System.DBNull.Value);
+
+            if (Email != null)
+                command.Parameters.AddWithValue("@Email", Email);
+            else
+                command.Parameters.AddWithValue("@Email", System.DBNull.Value);    
+
+
             if (ImagePath != null)
                 command.Parameters.AddWithValue("@ImagePath", ImagePath);
             else
@@ -178,7 +220,7 @@ Phone, ref string Email, ref int NationalityCountryID, ref string ImagePath)
             return PersonID;
         }
 
-        public static bool UpdatePerson(int PersonID, string FirstName, string SecondName, string ThirdName, string LastName, string NationalNo, DateTime DateOfBirth, char Gender, string Address, string Phone, string Email, int NationalityCountryID, string ImagePath)
+        public static bool UpdatePerson(int PersonID, string FirstName, string SecondName, string ThirdName, string LastName, string NationalNo, DateTime DateOfBirth, byte Gender, string Address, string Phone, string Email, int NationalityCountryID, string ImagePath)
         {
             int rowsAffected = 0;
 
@@ -190,16 +232,29 @@ SET          nationalno = @NationalNo, firstname = @FirstName, secondname = @Sec
             SqlCommand command = new SqlCommand(query, connection);
             command.Parameters.AddWithValue("@NationalNo", NationalNo);
             command.Parameters.AddWithValue("@FirstName", FirstName);
-            command.Parameters.AddWithValue("@SecondName", SecondName);
-            command.Parameters.AddWithValue("@ThirdName", ThirdName);
             command.Parameters.AddWithValue("@LastName", LastName);
             command.Parameters.AddWithValue("@DateOfBirth", DateOfBirth);
             command.Parameters.AddWithValue("@Gender", Gender);
             command.Parameters.AddWithValue("@Address", Address);
             command.Parameters.AddWithValue("@Phone", Phone);
-            command.Parameters.AddWithValue("@Email", Email);
             command.Parameters.AddWithValue("@NationalityCountryID", NationalityCountryID);
-            
+
+            if (SecondName != null)
+                command.Parameters.AddWithValue("@SecondName", SecondName);
+            else
+                command.Parameters.AddWithValue("@SecondName", System.DBNull.Value);
+
+            if (ThirdName != null)
+                command.Parameters.AddWithValue("@ThirdName", ThirdName);
+            else
+                command.Parameters.AddWithValue("@ThirdName", System.DBNull.Value);
+
+            if (Email != null)
+                command.Parameters.AddWithValue("@Email", Email);
+            else
+                command.Parameters.AddWithValue("@Email", System.DBNull.Value);    
+
+
             if (ImagePath != null)
                 command.Parameters.AddWithValue("@ImagePath", ImagePath);
             else
