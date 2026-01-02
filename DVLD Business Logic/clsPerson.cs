@@ -149,5 +149,10 @@ namespace DVLD_Business_Logic
         {
             return new clsPerson();
         }
+
+        public bool Delete(int PersonID)
+        {
+            return clsPersonData.DeletePerson(PersonID);
+        }
     }
 }

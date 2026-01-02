@@ -125,6 +125,36 @@ namespace DVLD_Presentation_Layer
             frmAddEditPersonInfo.ShowDialog();
         }
 
+        private bool isDeletionConfirmed(int PersonID)
+        {
+            string PersonFullName = dgvPeopleList.SelectedRows[0].Cells["FirstName"].Value + " " + dgvPeopleList.SelectedRows[0].Cells["LastName"].Value;
+
+            if (MessageBox.Show("Are you sure you want to Delete "+ PersonFullName + " with ID:" + PersonID + "?", "Confirm Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private void deletePerson(int PersonID)
+        {
+            if (isDeletionConfirmed(PersonID))
+            {
+                clsPerson Person = clsPerson.Find(PersonID);
+
+                if (Person.Delete(PersonID))
+                {
+                    MessageBox.Show("Deleted Successfully!", "Deletion Succeeded", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    bool RefreshPeopleListFlag = true;
+                    OnPeopleListUpdated(tsmiDelete, RefreshPeopleListFlag);
+                }
+                else
+                    MessageBox.Show("Failed to Delete Person Info.", "Deletion Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         // --------------------------------
         // 
         //  right clicked on people's list
@@ -152,7 +182,8 @@ namespace DVLD_Presentation_Layer
 
         private void tsmiDelete_Click(object sender, EventArgs e)
         {
-            // delete person code here
+            int PersonID = (int)dgvPeopleList.SelectedRows[0].Cells["PersonID"].Value;
+            deletePerson(PersonID);
         }
 
         private void tsmiSendEmail_Click(object sender, EventArgs e)

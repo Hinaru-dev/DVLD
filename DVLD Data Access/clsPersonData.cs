@@ -314,7 +314,7 @@ SET          nationalno = @NationalNo, firstname = @FirstName, secondname = @Sec
         }
         
         public static bool DeletePerson(int PersonID)
-            {
+        {
             int rowsDeleted = 0;
 
             SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString);
