@@ -18,6 +18,13 @@ namespace DVLD_Presentation_Layer
         private enum enGender { Male = 0, Female = 1 }
         private enum enImageTag { MaleImage = 0, FemaleImage = 1, PersonImage = 2 }
 
+
+        // Declare a delegate
+        public delegate void DataBackEventHandler(object sender, bool RefreshPeopleList);
+
+        // Declare an event using the delegate
+        public event DataBackEventHandler DataBack;
+
         private enMode Mode;
 
         private void InitializeForm()
@@ -229,6 +236,12 @@ namespace DVLD_Presentation_Layer
             }
         }
 
+        
+        private void SendDataBack_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
         // -----------------------------------
         //
         //  controls and events logic/methods
@@ -252,6 +265,12 @@ namespace DVLD_Presentation_Layer
 
             else
                 MessageBox.Show("Please Make Sure to fill needed Input Fields Properly Before Saving", "Invalid Saving", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            
+            // Trigger the event to send data back to Form1
+            bool refreshPeopleList = true;
+            if (DataBack != null)
+                DataBack.Invoke(this, refreshPeopleList);
         }
 
         private void btnClose_Click(object sender, EventArgs e)

@@ -13,7 +13,7 @@ namespace DVLD_Presentation_Layer
 {
     public partial class frmManagePeople : Form
     {
-        private enum enFilter { None = -1, personid=0, nationalno=1, firstname=2, secondname=3, thirdname=4, lastname=5, nationality=6, gendor=7, phone=8, email=9 };
+        private enum enFilter { None = -1, personid=0, nationalno=1, firstname=2, secondname=3, thirdname=4, lastname=5, nationalitycountryid=6, gendor=7, phone=8, email=9 };
         
         public frmManagePeople()
         {
@@ -62,7 +62,7 @@ namespace DVLD_Presentation_Layer
                 enFilter ColumnIndex = (enFilter)(cbFilter.SelectedIndex - 1);
 
                 // if this column value is numerical:
-                if (ColumnIndex == enFilter.personid || ColumnIndex == enFilter.gendor)
+                if (ColumnIndex == enFilter.personid || ColumnIndex == enFilter.nationalitycountryid || ColumnIndex == enFilter.gendor)
                     bs.Filter = ColumnIndex.ToString() + " = " + tbFilter.Text;
 
                 // else if its string:
@@ -72,7 +72,7 @@ namespace DVLD_Presentation_Layer
                 dgvPeopleList.DataSource = bs.DataSource;
             }
 
-            OnPeopleListUpdated();
+            OnPeopleListUpdated(sender);
         }
 
         private void tbFilter_KeyPress(object sender, KeyPressEventArgs e)
@@ -104,24 +104,25 @@ namespace DVLD_Presentation_Layer
             lblRecordsCount.Text = dgvPeopleList.Rows.Count.ToString();
         }
 
-        private void OnPeopleListUpdated()
+        private void OnPeopleListUpdated(object sender, bool needListRefresh = false)
         {
-            RefreshPeopleList();
+            if (needListRefresh)
+                RefreshPeopleList();
             UpdateRecordsCount();
         }
 
         private void AddNewPerson()
         {
             FrmAddEditPersonInfo frmAddEditPersonInfo = new FrmAddEditPersonInfo();
-            frmAddEditPersonInfo.Show();
-            OnPeopleListUpdated();
+            frmAddEditPersonInfo.DataBack += OnPeopleListUpdated;
+            frmAddEditPersonInfo.ShowDialog();
         }
 
         private void EditPerson(int PersonID)
         {
             FrmAddEditPersonInfo frmAddEditPersonInfo = new FrmAddEditPersonInfo(PersonID);
+            frmAddEditPersonInfo.DataBack += OnPeopleListUpdated;
             frmAddEditPersonInfo.ShowDialog();
-            OnPeopleListUpdated();
         }
 
         // --------------------------------
