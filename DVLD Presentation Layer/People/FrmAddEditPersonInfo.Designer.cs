@@ -530,7 +530,6 @@
             this.Controls.Add(this.label1);
             this.Name = "FrmAddEditPersonInfo";
             this.Text = "Add / Edit Person Info";
-            this.Load += new System.EventHandler(this.FrmAddEditPersonInfo_Load);
             ((System.ComponentModel.ISupportInitialize)(this.epInputAlreadyExistsError)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();

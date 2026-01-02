@@ -139,9 +139,11 @@
             this.dgvPeopleList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPeopleList.ContextMenuStrip = this.cmsPeopleList;
             this.dgvPeopleList.Location = new System.Drawing.Point(12, 207);
+            this.dgvPeopleList.MultiSelect = false;
             this.dgvPeopleList.Name = "dgvPeopleList";
             this.dgvPeopleList.ReadOnly = true;
             this.dgvPeopleList.RowTemplate.Height = 24;
+            this.dgvPeopleList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPeopleList.Size = new System.Drawing.Size(994, 295);
             this.dgvPeopleList.TabIndex = 9;
             // 
@@ -159,7 +161,7 @@
             this.tsmiSendEmail,
             this.tsmiPhoneCall});
             this.cmsPeopleList.Name = "contextMenuStrip1";
-            this.cmsPeopleList.Size = new System.Drawing.Size(197, 272);
+            this.cmsPeopleList.Size = new System.Drawing.Size(197, 250);
             // 
             // tsmiShowDetails
             // 

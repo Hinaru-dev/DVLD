@@ -227,7 +227,8 @@ Phone, ref string Email, ref int NationalityCountryID, ref string ImagePath)
             SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString);
 
             string query = @"UPDATE people
-SET          nationalno = @NationalNo, firstname = @FirstName, secondname = @SecondName, thirdname = @ThirdName, lastname = @LastName, dateofbirth = @DateOfBirth, gendor = @Gender, address = @Address, phone = @Phone, email = @Email, nationalitycountryid = @NationalityCountryID, imagepath = @ImagePath;";
+SET          nationalno = @NationalNo, firstname = @FirstName, secondname = @SecondName, thirdname = @ThirdName, lastname = @LastName, dateofbirth = @DateOfBirth, gendor = @Gender, address = @Address, phone = @Phone, email = @Email, nationalitycountryid = @NationalityCountryID, imagepath = @ImagePath
+                            WHERE personid = @PersonID;";
 
             SqlCommand command = new SqlCommand(query, connection);
             command.Parameters.AddWithValue("@NationalNo", NationalNo);
@@ -238,6 +239,7 @@ SET          nationalno = @NationalNo, firstname = @FirstName, secondname = @Sec
             command.Parameters.AddWithValue("@Address", Address);
             command.Parameters.AddWithValue("@Phone", Phone);
             command.Parameters.AddWithValue("@NationalityCountryID", NationalityCountryID);
+            command.Parameters.AddWithValue("@PersonID", PersonID);
 
             if (SecondName != null)
                 command.Parameters.AddWithValue("@SecondName", SecondName);

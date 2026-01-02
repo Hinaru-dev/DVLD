@@ -117,6 +117,13 @@ namespace DVLD_Presentation_Layer
             OnPeopleListUpdated();
         }
 
+        private void EditPerson(int PersonID)
+        {
+            FrmAddEditPersonInfo frmAddEditPersonInfo = new FrmAddEditPersonInfo(PersonID);
+            frmAddEditPersonInfo.ShowDialog();
+            OnPeopleListUpdated();
+        }
+
         // --------------------------------
         // 
         //  right clicked on people's list
@@ -130,12 +137,16 @@ namespace DVLD_Presentation_Layer
 
         private void tsmiAddNewPerson_Click(object sender, EventArgs e)
         {
-            // add new person code here
+            AddNewPerson();
         }
 
         private void tsmiEdit_Click(object sender, EventArgs e)
         {
-            // edit person info code here
+            if (dgvPeopleList.SelectedRows.Count == 1)
+            {
+                DataGridViewRow SelectedRow = dgvPeopleList.SelectedRows[0];
+                EditPerson((int)SelectedRow.Cells["personid"].Value);
+            }
         }
 
         private void tsmiDelete_Click(object sender, EventArgs e)

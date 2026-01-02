@@ -34,6 +34,8 @@ namespace DVLD_Business_Logic
 
         clsPerson()
         {
+            Mode = enMode.AddNewMode;
+
             PersonID    = -1;
             NationalNo  = string.Empty;
             FirstName   = string.Empty;
@@ -51,6 +53,8 @@ namespace DVLD_Business_Logic
 
         clsPerson(int PersonID, string NationalNo, string FirstName, string SecondName, string ThirdName, string lastName, DateTime DateOfBirth, byte Gender, string Address, string Phone, string Email, int NationalityCountryID, string ImagePath)
         {
+            Mode = enMode.UpdateMode;
+
             this.PersonID = PersonID;
             this.NationalNo = NationalNo;
             this.FirstName = FirstName;

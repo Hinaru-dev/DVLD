@@ -20,12 +20,19 @@ namespace DVLD_Presentation_Layer
 
         private enMode Mode;
 
-        public FrmAddEditPersonInfo()
+        private void InitializeForm()
         {
             InitializeComponent();
 
             loadCountriesList();
+            
+            RestrictPersonAgePicker();
+        }
 
+        public FrmAddEditPersonInfo()
+        {
+            InitializeForm();
+            
             Mode = enMode.AddNew;
 
             tbEmail.Text = string.Empty;
@@ -40,7 +47,7 @@ namespace DVLD_Presentation_Layer
 
         public FrmAddEditPersonInfo(int PersonID)
         {
-            InitializeComponent();
+            InitializeForm();
 
             Mode = enMode.Update;
             Person = clsPerson.Find(PersonID);
@@ -67,9 +74,11 @@ namespace DVLD_Presentation_Layer
                 if ((enGender)Person.Gender == enGender.Female)
                 {
                     rbFemale.Checked = true;
+                    // since female isn't default gender image update it
+                    rbGenderChangedProtocol();
                 }
 
-                if (Person.ImagePath != null)
+                if (Person.ImagePath != string.Empty && Person.ImagePath != null)
                 {
                     pbPersonImage.ImageLocation = Person.ImagePath;
                     pbPersonImage.Tag = enImageTag.PersonImage.ToString();
@@ -151,6 +160,8 @@ namespace DVLD_Presentation_Layer
         private string CopyPersonImageBeforeSaving()
         {
             // guid naming and copy-saving feature should be done on dataAccessLevel i believe
+            if (pbPersonImage.Tag == null)
+                return Person.ImagePath;
 
             if (pbPersonImage.Tag.ToString() == enImageTag.PersonImage.ToString())
             {
@@ -264,11 +275,6 @@ namespace DVLD_Presentation_Layer
                 pbPersonImage.ImageLocation = ofdPersonImage.FileName;
                 pbPersonImage.Tag = enImageTag.PersonImage.ToString();
             }
-        }
-
-        private void FrmAddEditPersonInfo_Load(object sender, EventArgs e)
-        {
-            RestrictPersonAgePicker();
         }
 
         private void tbNationalNo_Validating(object sender, CancelEventArgs e)
