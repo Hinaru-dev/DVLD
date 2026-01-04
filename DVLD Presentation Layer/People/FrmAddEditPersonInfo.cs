@@ -258,7 +258,12 @@ namespace DVLD_Presentation_Layer
                 FillPersonInfo();
 
                 if (Person.Save())
+                {
+                    if (Mode == enMode.AddNew) 
+                        Mode = enMode.Update;
+                    lblPersonID.Text = Person.PersonID.ToString();
                     MessageBox.Show("saved Successfully!", "Saving Succeeded", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
                 else
                     MessageBox.Show("Failed to Save Person Info.", "Saving Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

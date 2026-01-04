@@ -155,6 +155,13 @@ namespace DVLD_Presentation_Layer
             }
         }
 
+        private void ShowPersonDetails(int PersonID)
+        {
+            frmPersonCardDetails frmPersonCardDetails = new frmPersonCardDetails(PersonID);
+            frmPersonCardDetails.DataBack += OnPeopleListUpdated;
+            frmPersonCardDetails.ShowDialog();
+        }
+
         // --------------------------------
         // 
         //  right clicked on people's list
@@ -163,7 +170,8 @@ namespace DVLD_Presentation_Layer
         
         private void tsmiShowDetails_Click(object sender, EventArgs e)
         {
-            // show details code here
+            int PersonID = (int)dgvPeopleList.SelectedRows[0].Cells["PersonID"].Value;
+            ShowPersonDetails(PersonID);
         }
 
         private void tsmiAddNewPerson_Click(object sender, EventArgs e)

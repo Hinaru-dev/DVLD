@@ -125,7 +125,10 @@ namespace DVLD_Business_Logic
 	        {
 		        case enMode.AddNewMode:
                     if (_AddNewPerson())
+                    {
+                        Mode = enMode.UpdateMode;
                         return true;
+                    }
                     else
                         return false;
 

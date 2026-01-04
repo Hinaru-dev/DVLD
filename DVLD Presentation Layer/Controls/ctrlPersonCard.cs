@@ -89,7 +89,8 @@ namespace DVLD_Presentation_Layer.Controls
             }
             else
             {
-                MessageBox.Show("Couldn't find this image: = " + _Person.ImagePath, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (_Person.ImagePath != string.Empty && _Person.ImagePath != null)
+                    MessageBox.Show("Couldn't find this image: " + _Person.ImagePath, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
