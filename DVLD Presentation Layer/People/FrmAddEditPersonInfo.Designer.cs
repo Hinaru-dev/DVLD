@@ -55,9 +55,8 @@
             this.cbCountry = new System.Windows.Forms.ComboBox();
             this.rbMale = new System.Windows.Forms.RadioButton();
             this.rbFemale = new System.Windows.Forms.RadioButton();
-            this.rtbAddess = new System.Windows.Forms.RichTextBox();
             this.lnklblSetImage = new System.Windows.Forms.LinkLabel();
-            this.epInputAlreadyExistsError = new System.Windows.Forms.ErrorProvider(this.components);
+            this.ErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.btnClose = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.pictureBox11 = new System.Windows.Forms.PictureBox();
@@ -72,7 +71,9 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.ofdPersonImage = new System.Windows.Forms.OpenFileDialog();
-            ((System.ComponentModel.ISupportInitialize)(this.epInputAlreadyExistsError)).BeginInit();
+            this.lnklblRemove = new System.Windows.Forms.LinkLabel();
+            this.tbAddress = new System.Windows.Forms.TextBox();
+            ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPersonImage)).BeginInit();
@@ -239,6 +240,7 @@
             this.tbEmail.Name = "tbEmail";
             this.tbEmail.Size = new System.Drawing.Size(144, 22);
             this.tbEmail.TabIndex = 25;
+            this.tbEmail.Validating += new System.ComponentModel.CancelEventHandler(this.tbEmail_Validating);
             // 
             // tbPhone
             // 
@@ -246,6 +248,7 @@
             this.tbPhone.Name = "tbPhone";
             this.tbPhone.Size = new System.Drawing.Size(144, 22);
             this.tbPhone.TabIndex = 26;
+            this.tbPhone.Validating += new System.ComponentModel.CancelEventHandler(this.tbPhone_Validating);
             // 
             // tbNationalNo
             // 
@@ -261,6 +264,7 @@
             this.tbFirstName.Name = "tbFirstName";
             this.tbFirstName.Size = new System.Drawing.Size(144, 22);
             this.tbFirstName.TabIndex = 28;
+            this.tbFirstName.Validating += new System.ComponentModel.CancelEventHandler(this.tbFirstName_Validating);
             // 
             // tbSecondName
             // 
@@ -282,6 +286,7 @@
             this.tbLastName.Name = "tbLastName";
             this.tbLastName.Size = new System.Drawing.Size(144, 22);
             this.tbLastName.TabIndex = 31;
+            this.tbLastName.Validating += new System.ComponentModel.CancelEventHandler(this.tbLastName_Validating);
             // 
             // dtpDateOfBirth
             // 
@@ -322,14 +327,6 @@
             this.rbFemale.UseVisualStyleBackColor = true;
             this.rbFemale.Click += new System.EventHandler(this.rbFemale_Click);
             // 
-            // rtbAddess
-            // 
-            this.rtbAddess.Location = new System.Drawing.Point(166, 267);
-            this.rtbAddess.Name = "rtbAddess";
-            this.rtbAddess.Size = new System.Drawing.Size(475, 82);
-            this.rtbAddess.TabIndex = 37;
-            this.rtbAddess.Text = "";
-            // 
             // lnklblSetImage
             // 
             this.lnklblSetImage.AutoSize = true;
@@ -341,9 +338,9 @@
             this.lnklblSetImage.Text = "Set Image";
             this.lnklblSetImage.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnklblSetImage_LinkClicked);
             // 
-            // epInputAlreadyExistsError
+            // ErrorProvider
             // 
-            this.epInputAlreadyExistsError.ContainerControl = this;
+            this.ErrorProvider.ContainerControl = this;
             // 
             // btnClose
             // 
@@ -482,15 +479,36 @@
             this.pictureBox1.TabIndex = 15;
             this.pictureBox1.TabStop = false;
             // 
+            // lnklblRemove
+            // 
+            this.lnklblRemove.AutoSize = true;
+            this.lnklblRemove.Location = new System.Drawing.Point(714, 334);
+            this.lnklblRemove.Name = "lnklblRemove";
+            this.lnklblRemove.Size = new System.Drawing.Size(60, 17);
+            this.lnklblRemove.TabIndex = 42;
+            this.lnklblRemove.TabStop = true;
+            this.lnklblRemove.Text = "Remove";
+            this.lnklblRemove.Visible = false;
+            this.lnklblRemove.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnklblRemove_LinkClicked);
+            // 
+            // tbAddress
+            // 
+            this.tbAddress.Location = new System.Drawing.Point(166, 267);
+            this.tbAddress.Multiline = true;
+            this.tbAddress.Name = "tbAddress";
+            this.tbAddress.Size = new System.Drawing.Size(475, 82);
+            this.tbAddress.TabIndex = 43;
+            this.tbAddress.Validating += new System.ComponentModel.CancelEventHandler(this.tbAddress_Validating);
+            // 
             // FrmAddEditPersonInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(843, 412);
+            this.Controls.Add(this.lnklblRemove);
             this.Controls.Add(this.lnklblSetImage);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.rtbAddess);
             this.Controls.Add(this.rbFemale);
             this.Controls.Add(this.rbMale);
             this.Controls.Add(this.pictureBox11);
@@ -528,9 +546,10 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.lblPersonID);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.tbAddress);
             this.Name = "FrmAddEditPersonInfo";
             this.Text = "Add / Edit Person Info";
-            ((System.ComponentModel.ISupportInitialize)(this.epInputAlreadyExistsError)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPersonImage)).EndInit();
@@ -586,11 +605,12 @@
         private System.Windows.Forms.PictureBox pictureBox11;
         private System.Windows.Forms.RadioButton rbMale;
         private System.Windows.Forms.RadioButton rbFemale;
-        private System.Windows.Forms.RichTextBox rtbAddess;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.LinkLabel lnklblSetImage;
-        private System.Windows.Forms.ErrorProvider epInputAlreadyExistsError;
+        private System.Windows.Forms.ErrorProvider ErrorProvider;
         private System.Windows.Forms.OpenFileDialog ofdPersonImage;
+        private System.Windows.Forms.LinkLabel lnklblRemove;
+        private System.Windows.Forms.TextBox tbAddress;
     }
 }

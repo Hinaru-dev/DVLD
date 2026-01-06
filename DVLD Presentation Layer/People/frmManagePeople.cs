@@ -162,6 +162,11 @@ namespace DVLD_Presentation_Layer
             frmPersonCardDetails.ShowDialog();
         }
 
+        private void NotReadyFeatureMessage()
+        {
+            MessageBox.Show("This Feature Is Not Implemented Yet!", "Not Ready!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+
         // --------------------------------
         // 
         //  right clicked on people's list
@@ -196,12 +201,14 @@ namespace DVLD_Presentation_Layer
 
         private void tsmiSendEmail_Click(object sender, EventArgs e)
         {
-            // send email code here
+            // send email code will be here, god willing
+            NotReadyFeatureMessage();
         }
 
         private void tsmiPhoneCall_Click(object sender, EventArgs e)
         {
-            // phone call selected person code here
+            // phone call selected person code will be here, god willing
+            NotReadyFeatureMessage();
         }
     }
 }

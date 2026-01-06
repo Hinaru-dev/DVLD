@@ -27,18 +27,18 @@ namespace DVLD_Presentation_Layer
 
         private enMode Mode;
 
-        private void InitializeForm()
+        private void _InitializeForm()
         {
             InitializeComponent();
 
-            loadCountriesList();
+            _loadCountriesList();
             
-            RestrictPersonAgePicker();
+            _RestrictPersonAgePicker();
         }
 
         public FrmAddEditPersonInfo()
         {
-            InitializeForm();
+            _InitializeForm();
             
             Mode = enMode.AddNew;
 
@@ -49,12 +49,12 @@ namespace DVLD_Presentation_Layer
             tbLastName.Text = string.Empty;
             tbNationalNo.Text = string.Empty;
             tbPhone.Text = string.Empty;
-            rtbAddess.Text = string.Empty;
+            tbAddress.Text = string.Empty;
         }
 
         public FrmAddEditPersonInfo(int PersonID)
         {
-            InitializeForm();
+            _InitializeForm();
 
             Mode = enMode.Update;
             Person = clsPerson.Find(PersonID);
@@ -69,7 +69,7 @@ namespace DVLD_Presentation_Layer
                 tbNationalNo.Text = Person.NationalNo;
                 tbEmail.Text = Person.Email;
                 tbPhone.Text = Person.Phone;
-                rtbAddess.Text = Person.Address;
+                tbAddress.Text = Person.Address;
                 dtpDateOfBirth.Value = Person.DateOfBirth;
                 cbCountry.SelectedValue = Person.NationalityCountryID;
 
@@ -82,13 +82,17 @@ namespace DVLD_Presentation_Layer
                 {
                     rbFemale.Checked = true;
                     // since female isn't default gender image update it
-                    rbGenderChangedProtocol();
+                    _rbGenderChangedProtocol();
                 }
 
                 if (Person.ImagePath != string.Empty && Person.ImagePath != null)
                 {
                     pbPersonImage.ImageLocation = Person.ImagePath;
                     pbPersonImage.Tag = enImageTag.PersonImage.ToString();
+                    lnklblRemove.Visible = true;
+
+                    // flag image as original to be ready in case of delete
+                    lnklblRemove.Tag = string.Empty;
                 }
             }
             else
@@ -104,27 +108,27 @@ namespace DVLD_Presentation_Layer
         //
         // -----------------------------------
 
-        private void loadCountriesList()
+        private void _loadCountriesList()
         {
             cbCountry.DataSource = clsCountry.getAllCountriesList();
             cbCountry.DisplayMember = "CountryName";
             cbCountry.ValueMember = "CountryID";
         }
 
-        private DateTime getDateRestrictedByLegalAge()
+        private DateTime _getDateRestrictedByLegalAge()
         {
-                     double DaysIn4Years = 1461; // (365 * 3 + 366)
+            double DaysIn4Years = 1461; // (365 * 3 + 366)
             double LegalAgeInDays = Math.Ceiling(4.5 * DaysIn4Years); // 18 years = 4.5 * 4 years = 6575days
 
             return DateTime.Now.Subtract(TimeSpan.FromDays(LegalAgeInDays));
         }
 
-        private void RestrictPersonAgePicker()
+        private void _RestrictPersonAgePicker()
         { 
-            dtpDateOfBirth.MaxDate = getDateRestrictedByLegalAge();
+            dtpDateOfBirth.MaxDate = _getDateRestrictedByLegalAge();
         }
 
-        private void InputAlreadyExistsError(object sender, CancelEventArgs e)
+        private void _InputAlreadyExistsError(object sender, CancelEventArgs e)
         {
             TextBox tb = (TextBox)sender;
             
@@ -132,41 +136,96 @@ namespace DVLD_Presentation_Layer
             {
                 e.Cancel = true;
                 tb.Focus();
-                epInputAlreadyExistsError.SetError(tb, tb.Tag + " Already exists, Please pick another one!");
+                ErrorProvider.SetError(tb, tb.Text + " Already exists, Please pick another one!");
             }
             else
             {
                 e.Cancel=false;
-                epInputAlreadyExistsError.SetError(tb, "");
+                ErrorProvider.SetError(tb, "");
             }
         }
 
-        private bool isValidInput()
+        private void _EmptyTextBoxError(object sender, CancelEventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+
+            if (tb.Text == string.Empty)
+            {
+                e.Cancel = true;
+                tb.Focus();
+                ErrorProvider.SetError(tb, "Required Field, Please fill your information!");
+            }
+            else
+            {
+                e.Cancel = false;
+                ErrorProvider.SetError(tb, "");
+            }
+        }
+
+        private void _InvalidEmailFormatError(CancelEventArgs e)
+        {
+
+            if (string.IsNullOrEmpty(tbEmail.Text.Trim()))
+                return;
+
+            try
+            {
+                System.Net.Mail.MailAddress m = new System.Net.Mail.MailAddress(tbEmail.Text.Trim());
+            }
+            catch (Exception ex)
+            {
+                e.Cancel = true;
+                tbEmail.Focus();
+                ErrorProvider.SetError(tbEmail, "Invalid Email format, please enter your right email!\n" + ex.Message);
+                return;
+            }
+
+            // if no exception catched then valid email format
+            e.Cancel = false;
+            ErrorProvider.SetError(tbEmail, "");
+        }
+
+        private bool _isValidInput()
         {
             bool isValidInput = true;
-            
-            // in case there is already exist national no input
-            if (epInputAlreadyExistsError.GetError(tbNationalNo) != string.Empty)
-                return isValidInput = false;
 
             // non-nullable fields validation:
             // like non nullable fields to not be empty
-            if ( tbFirstName.Text  == string.Empty 
-              || tbLastName.Text   == string.Empty 
-              || tbNationalNo.Text == string.Empty 
-              || tbPhone.Text      == string.Empty 
-              || rtbAddess.Text    == string.Empty
-              || !(rbMale.Checked || rbFemale.Checked)
-              || cbCountry.Text == string.Empty)
+            if (ErrorProvider.GetError(tbFirstName) != string.Empty)
+                return isValidInput = false;
+            
+            if (ErrorProvider.GetError(tbLastName) != string.Empty)
+                return isValidInput = false;
+
+            // in case there is already exist nationalNo input
+            // or if it's empty (non-nullable field) 
+            if (ErrorProvider.GetError(tbNationalNo) != string.Empty)
+                return isValidInput = false;
+
+            if (ErrorProvider.GetError(tbPhone) != string.Empty)
+                return isValidInput = false;
+            
+            if (ErrorProvider.GetError(tbAddress) != string.Empty)
+                return isValidInput = false;
+
+            if (!(rbMale.Checked || rbFemale.Checked))
+            {
+                MessageBox.Show("Please pick your gender first", "No Gender Choice");
+                return isValidInput = false;
+            }
+
+            if (cbCountry.Text == string.Empty)
                 return isValidInput = false;
 
             return isValidInput;
         }
 
         // copy person picture to a local folder then return its path
-        private string CopyPersonImageBeforeSaving()
+        private string _CopyPersonImageBeforeSaving()
         {
             // guid naming and copy-saving feature should be done on dataAccessLevel i believe
+            
+            // prevent null exception when comparing tag to enImageTag
             if (pbPersonImage.Tag == null)
                 return Person.ImagePath;
 
@@ -193,7 +252,7 @@ namespace DVLD_Presentation_Layer
             return Person.ImagePath;
         }
 
-        private void FillPersonInfo()
+        private void _FillPersonInfo()
         {
             Person.FirstName = tbFirstName.Text;
             Person.SecondName = tbSecondName.Text == string.Empty ? null : tbSecondName.Text;
@@ -202,7 +261,7 @@ namespace DVLD_Presentation_Layer
             Person.NationalNo = tbNationalNo.Text;
             Person.Email = tbEmail.Text == string.Empty ? null : tbEmail.Text;
             Person.Phone = tbPhone.Text;
-            Person.Address = rtbAddess.Text;
+            Person.Address = tbAddress.Text;
             Person.DateOfBirth = dtpDateOfBirth.Value;
             Person.NationalityCountryID = (int)cbCountry.SelectedValue;
 
@@ -212,10 +271,16 @@ namespace DVLD_Presentation_Layer
             else // if (rbFemale.Checked)
                 Person.Gender = (byte)enGender.Female;
 
-            Person.ImagePath = CopyPersonImageBeforeSaving();
+
+            // if original image is flaged for deletion
+            if (lnklblRemove.Tag != null)
+                // only delete if person saves Changes or reset the image by another 
+                _DeleteImage(lnklblRemove.Tag.ToString());
+
+            Person.ImagePath = _CopyPersonImageBeforeSaving();
         }
 
-        private void rbGenderChangedProtocol()
+        private void _rbGenderChangedProtocol()
         {
             if (pbPersonImage.Tag == null)
                 pbPersonImage.Tag = string.Empty;
@@ -236,10 +301,30 @@ namespace DVLD_Presentation_Layer
             }
         }
 
-        
-        private void SendDataBack_Click(object sender, EventArgs e)
+        private void _DeleteImage(string ImagePath)
         {
-            this.Close();
+            if (System.IO.File.Exists(ImagePath))
+            {
+                System.IO.File.Delete(ImagePath);
+                Person.ImagePath = null;
+                lnklblRemove.Tag = null;
+            }
+        }
+
+        private void _ResetImage(bool HideRemoveLinkLabel = true)
+        {
+            // only flag original image here to be deleted by saving image paths
+            if (lnklblRemove.Tag == string.Empty)
+                lnklblRemove.Tag = pbPersonImage.ImageLocation;
+
+            // Hide lnklblRemove
+            if (HideRemoveLinkLabel)
+            {
+                lnklblRemove.Visible = false;
+                // Reset pbImage Tag To gendered & image to proper default one
+                pbPersonImage.Tag = string.Empty;
+                _rbGenderChangedProtocol();
+            }
         }
 
         // -----------------------------------
@@ -253,15 +338,17 @@ namespace DVLD_Presentation_Layer
             if (Mode == enMode.AddNew)
                 Person = clsPerson.getNewPersonObject();
 
-            if (isValidInput())
+            if (_isValidInput())
             {
-                FillPersonInfo();
+                _FillPersonInfo();
 
                 if (Person.Save())
                 {
                     if (Mode == enMode.AddNew) 
                         Mode = enMode.Update;
+
                     lblPersonID.Text = Person.PersonID.ToString();
+
                     MessageBox.Show("saved Successfully!", "Saving Succeeded", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
@@ -296,25 +383,61 @@ namespace DVLD_Presentation_Layer
 
             if (ofdPersonImage.ShowDialog() == DialogResult.OK)
             {
+                if (pbPersonImage.Tag.ToString() == enImageTag.PersonImage.ToString())
+                    _ResetImage(false); // _ResetImage(bool HideRemoveLinkLabel);
+
                 pbPersonImage.ImageLocation = ofdPersonImage.FileName;
                 pbPersonImage.Tag = enImageTag.PersonImage.ToString();
+                lnklblRemove.Visible = true;
             }
         }
 
         private void tbNationalNo_Validating(object sender, CancelEventArgs e)
         {
-            InputAlreadyExistsError(sender, e);
+            _InputAlreadyExistsError(sender, e);
+            _EmptyTextBoxError(sender, e);
         }
 
         private void rbMale_Click(object sender, EventArgs e)
         {
 
-            rbGenderChangedProtocol();
+            _rbGenderChangedProtocol();
         }
 
         private void rbFemale_Click(object sender, EventArgs e)
         {
-            rbGenderChangedProtocol();
+            _rbGenderChangedProtocol();
+        }
+
+        private void lnklblRemove_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            _ResetImage();
+        }
+
+        private void tbFirstName_Validating(object sender, CancelEventArgs e)
+        {
+            _EmptyTextBoxError(sender, e);
+        }
+
+        private void tbLastName_Validating(object sender, CancelEventArgs e)
+        {
+            _EmptyTextBoxError(sender, e);
+        }
+
+        private void tbPhone_Validating(object sender, CancelEventArgs e)
+        {
+            _EmptyTextBoxError(sender, e);
+        }
+
+        private void tbAddress_Validating(object sender, CancelEventArgs e)
+        {
+            _EmptyTextBoxError(sender, e);
+        }
+
+        private void tbEmail_Validating(object sender, CancelEventArgs e)
+        {
+            // validate email form
+            _InvalidEmailFormatError(e);
         }
     }
 }
