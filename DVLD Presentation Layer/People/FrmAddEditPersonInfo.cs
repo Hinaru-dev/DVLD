@@ -314,7 +314,7 @@ namespace DVLD_Presentation_Layer
         private void _ResetImage(bool HideRemoveLinkLabel = true)
         {
             // only flag original image here to be deleted by saving image paths
-            if (lnklblRemove.Tag == string.Empty)
+            if (lnklblRemove.Tag.ToString() == string.Empty)
                 lnklblRemove.Tag = pbPersonImage.ImageLocation;
 
             // Hide lnklblRemove

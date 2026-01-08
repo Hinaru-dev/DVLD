@@ -14,6 +14,7 @@ namespace DVLD_Presentation_Layer
     public partial class frmManagePeople : Form
     {
         private enum enFilter { None = -1, personid=0, nationalno=1, firstname=2, secondname=3, thirdname=4, lastname=5, nationalitycountryid=6, gendor=7, phone=8, email=9 };
+        private enum enGendor { Male=0, Female=1 };
         
         public frmManagePeople()
         {
@@ -22,9 +23,7 @@ namespace DVLD_Presentation_Layer
 
         private void frmManagePeople_Load(object sender, EventArgs e)
         {
-            // filling people list
-            dgvPeopleList.DataSource = clsPerson.getAllPeople();
-
+            PopulatePeopleList();
             UpdateRecordsCount();
         }
 
@@ -59,15 +58,18 @@ namespace DVLD_Presentation_Layer
 
             else
             {
-                enFilter ColumnIndex = (enFilter)(cbFilter.SelectedIndex - 1);
+                enFilter ColumnToBeFiltered = (enFilter)(cbFilter.SelectedIndex - 1);
 
                 // if this column value is numerical:
-                if (ColumnIndex == enFilter.personid || ColumnIndex == enFilter.nationalitycountryid || ColumnIndex == enFilter.gendor)
-                    bs.Filter = ColumnIndex.ToString() + " = " + tbFilter.Text;
+                if (ColumnToBeFiltered == enFilter.personid || ColumnToBeFiltered == enFilter.nationalitycountryid)
+                    bs.Filter = ColumnToBeFiltered.ToString() + " = " + tbFilter.Text;
+
+                else if (ColumnToBeFiltered == enFilter.gendor)
+                    bs.Filter = ColumnToBeFiltered.ToString() + " Like '" + tbFilter.Text + "%'";
 
                 // else if its string:
                 else
-                    bs.Filter = ColumnIndex.ToString() + " Like '%" + tbFilter.Text + "%'";
+                    bs.Filter = ColumnToBeFiltered.ToString() + " Like '%" + tbFilter.Text + "%'";
 
                 dgvPeopleList.DataSource = bs.DataSource;
             }
@@ -80,23 +82,73 @@ namespace DVLD_Presentation_Layer
             enFilter ColumnIndex = (enFilter)(cbFilter.SelectedIndex - 1);
             
             // if this column value is numerical:
-            if (ColumnIndex == enFilter.personid || ColumnIndex == enFilter.gendor)
+            // allow only numerical input
+            if (ColumnIndex == enFilter.personid)
             {
                 if (!char.IsNumber(e.KeyChar) && !char.IsControl(e.KeyChar))
                 {
                     e.Handled = true;
                 }
             }
+
+            // prevent numerical input for gender filter
+            if (ColumnIndex == enFilter.personid)
+            {
+                if (!char.IsLetter(e.KeyChar))
+                {
+                    e.Handled = true;
+                }
+            }
+
         }
 
         // --------------------
         //   custom functions 
         // --------------------
-
-        private void RefreshPeopleList()
+        private void CorrectGenderValues(ref DataTable PeopleList)
         {
-            // refill people's list from db
-            dgvPeopleList.DataSource = clsPerson.getAllPeople();
+            // Get the original position (ordinal) of the column
+            int originalPosition = PeopleList.Columns["Gendor"].Ordinal;
+
+            // Add a temporary column with the NEW data type
+            PeopleList.Columns.Add("Gender_Temp", typeof(String));
+            int LastPosition = PeopleList.Columns["Gender_Temp"].Ordinal;
+
+            // BeginLoadData / EndLoadData: Use these methods to turn off index maintenance and constraints while you are updating. This significantly speeds up bulk changes. (when have thousands of records)
+            PeopleList.BeginLoadData();
+            try
+            {
+                // Loop through all rows to convert the values
+                foreach (DataRow row in PeopleList.Rows)
+                {
+                    enGendor genderValue = row[originalPosition].ToString() == "1" ? enGendor.Female : enGendor.Male;
+                    row[LastPosition] = genderValue.ToString();
+                }
+            }
+            finally
+            {
+                PeopleList.EndLoadData();
+            }
+
+            // Remove the old column
+            PeopleList.Columns.Remove("Gendor");
+
+            // Rename the temp column back to the original name
+            PeopleList.Columns["Gender_Temp"].ColumnName = "Gendor";
+
+            // Move the column back to its original "middle" position
+            PeopleList.Columns["Gendor"].SetOrdinal(originalPosition);
+        }
+
+        private void PopulatePeopleList()
+        {
+            // Filling/Refill people's list from db
+            //dgvPeopleList.DataSource = clsPerson.getAllPeople();
+            DataTable PeopleList = clsPerson.getAllPeople();
+
+            CorrectGenderValues(ref PeopleList);
+
+            dgvPeopleList.DataSource = PeopleList;
         }
         
         private void UpdateRecordsCount()
@@ -107,7 +159,7 @@ namespace DVLD_Presentation_Layer
         private void OnPeopleListUpdated(object sender, bool needListRefresh = false)
         {
             if (needListRefresh)
-                RefreshPeopleList();
+                PopulatePeopleList();
             UpdateRecordsCount();
         }
 
