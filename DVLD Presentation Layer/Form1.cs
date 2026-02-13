@@ -11,7 +11,13 @@ using System.Windows.Forms;
 namespace DVLD_Presentation_Layer
 {
     public partial class Form1 : Form
-    {
+    {        
+        // Declare a delegate
+        public delegate void DataBackEventHandler();
+
+        // Declare an event using the delegate
+        public event DataBackEventHandler DataBack;
+
         public Form1()
         {
             InitializeComponent();
@@ -21,6 +27,13 @@ namespace DVLD_Presentation_Layer
         {
             Form frmManagePeople1 = new frmManagePeople();
             frmManagePeople1.ShowDialog();
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            // Trigger the event to send data back to Login Form
+            if (DataBack != null)
+                DataBack.Invoke();
         }
 
     }

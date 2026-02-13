@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
             this.MainMenuStrip = new System.Windows.Forms.MenuStrip();
-            this.applicationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.peopleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.driversToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.usersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.accountSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiApplications = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiPeople = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDrivers = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiUsers = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiAccountSettings = new System.Windows.Forms.ToolStripMenuItem();
+            this.applicationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.peopleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.driversToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.usersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.accountSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,41 +56,6 @@
             this.MainMenuStrip.Size = new System.Drawing.Size(1006, 72);
             this.MainMenuStrip.TabIndex = 0;
             this.MainMenuStrip.Text = "MainMenuStrip";
-            // 
-            // applicationToolStripMenuItem
-            // 
-            this.applicationToolStripMenuItem.Image = global::DVLD_Presentation_Layer.Properties.Resources.Applications_64;
-            this.applicationToolStripMenuItem.Name = "applicationToolStripMenuItem";
-            this.applicationToolStripMenuItem.Size = new System.Drawing.Size(162, 68);
-            this.applicationToolStripMenuItem.Text = "Application";
-            // 
-            // peopleToolStripMenuItem
-            // 
-            this.peopleToolStripMenuItem.Image = global::DVLD_Presentation_Layer.Properties.Resources.People_64;
-            this.peopleToolStripMenuItem.Name = "peopleToolStripMenuItem";
-            this.peopleToolStripMenuItem.Size = new System.Drawing.Size(131, 68);
-            this.peopleToolStripMenuItem.Text = "People";
-            // 
-            // driversToolStripMenuItem
-            // 
-            this.driversToolStripMenuItem.Image = global::DVLD_Presentation_Layer.Properties.Resources.Drivers_64;
-            this.driversToolStripMenuItem.Name = "driversToolStripMenuItem";
-            this.driversToolStripMenuItem.Size = new System.Drawing.Size(131, 68);
-            this.driversToolStripMenuItem.Text = "Drivers";
-            // 
-            // usersToolStripMenuItem
-            // 
-            this.usersToolStripMenuItem.Image = global::DVLD_Presentation_Layer.Properties.Resources.Users_2_64;
-            this.usersToolStripMenuItem.Name = "usersToolStripMenuItem";
-            this.usersToolStripMenuItem.Size = new System.Drawing.Size(120, 68);
-            this.usersToolStripMenuItem.Text = "Users";
-            // 
-            // accountSettingsToolStripMenuItem
-            // 
-            this.accountSettingsToolStripMenuItem.Image = global::DVLD_Presentation_Layer.Properties.Resources.account_settings_64;
-            this.accountSettingsToolStripMenuItem.Name = "accountSettingsToolStripMenuItem";
-            this.accountSettingsToolStripMenuItem.Size = new System.Drawing.Size(196, 68);
-            this.accountSettingsToolStripMenuItem.Text = "Account Settings";
             // 
             // tsmiApplications
             // 
@@ -128,6 +93,41 @@
             this.tsmiAccountSettings.Size = new System.Drawing.Size(196, 68);
             this.tsmiAccountSettings.Text = "Account Settings";
             // 
+            // applicationToolStripMenuItem
+            // 
+            this.applicationToolStripMenuItem.Image = global::DVLD_Presentation_Layer.Properties.Resources.Applications_64;
+            this.applicationToolStripMenuItem.Name = "applicationToolStripMenuItem";
+            this.applicationToolStripMenuItem.Size = new System.Drawing.Size(162, 68);
+            this.applicationToolStripMenuItem.Text = "Application";
+            // 
+            // peopleToolStripMenuItem
+            // 
+            this.peopleToolStripMenuItem.Image = global::DVLD_Presentation_Layer.Properties.Resources.People_64;
+            this.peopleToolStripMenuItem.Name = "peopleToolStripMenuItem";
+            this.peopleToolStripMenuItem.Size = new System.Drawing.Size(131, 68);
+            this.peopleToolStripMenuItem.Text = "People";
+            // 
+            // driversToolStripMenuItem
+            // 
+            this.driversToolStripMenuItem.Image = global::DVLD_Presentation_Layer.Properties.Resources.Drivers_64;
+            this.driversToolStripMenuItem.Name = "driversToolStripMenuItem";
+            this.driversToolStripMenuItem.Size = new System.Drawing.Size(131, 68);
+            this.driversToolStripMenuItem.Text = "Drivers";
+            // 
+            // usersToolStripMenuItem
+            // 
+            this.usersToolStripMenuItem.Image = global::DVLD_Presentation_Layer.Properties.Resources.Users_2_64;
+            this.usersToolStripMenuItem.Name = "usersToolStripMenuItem";
+            this.usersToolStripMenuItem.Size = new System.Drawing.Size(120, 68);
+            this.usersToolStripMenuItem.Text = "Users";
+            // 
+            // accountSettingsToolStripMenuItem
+            // 
+            this.accountSettingsToolStripMenuItem.Image = global::DVLD_Presentation_Layer.Properties.Resources.account_settings_64;
+            this.accountSettingsToolStripMenuItem.Name = "accountSettingsToolStripMenuItem";
+            this.accountSettingsToolStripMenuItem.Size = new System.Drawing.Size(196, 68);
+            this.accountSettingsToolStripMenuItem.Text = "Account Settings";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -138,6 +138,7 @@
             this.Controls.Add(this.MainMenuStrip);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.MainMenuStrip.ResumeLayout(false);
             this.MainMenuStrip.PerformLayout();
             this.ResumeLayout(false);

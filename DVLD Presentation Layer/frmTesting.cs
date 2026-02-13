@@ -26,5 +26,12 @@ namespace DVLD_Presentation_Layer
                 ctrlUserCard1.LoadUserInfo(tbInput.Text);
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            frmLogin login = new frmLogin();
+
+            login.Show();
+        }
     }
 }

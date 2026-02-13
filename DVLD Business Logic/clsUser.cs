@@ -82,6 +82,17 @@ namespace DVLD_Business_Logic
             return null;
         }
 
+        public static bool ValidateLoginInfo(String Username, string password)
+        {
+            clsUser user = clsUser.Find(Username);
+
+            if (user != null)
+                if (password == user.Password)
+                    return true;
+
+            return false;
+        }
+
         public bool Save()
         {
             switch (Mode)

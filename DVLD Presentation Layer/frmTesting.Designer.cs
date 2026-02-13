@@ -33,6 +33,7 @@
             this.rbUsername = new System.Windows.Forms.RadioButton();
             this.rbUserID = new System.Windows.Forms.RadioButton();
             this.tbInput = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ctrlUserCard1
@@ -81,11 +82,22 @@
             this.tbInput.Size = new System.Drawing.Size(100, 22);
             this.tbInput.TabIndex = 3;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(12, 314);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 91);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "Login";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // frmTesting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(774, 361);
+            this.ClientSize = new System.Drawing.Size(774, 417);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.tbInput);
             this.Controls.Add(this.rbUserID);
             this.Controls.Add(this.rbUsername);
@@ -105,6 +117,7 @@
         private System.Windows.Forms.RadioButton rbUsername;
         private System.Windows.Forms.RadioButton rbUserID;
         private System.Windows.Forms.TextBox tbInput;
+        private System.Windows.Forms.Button button1;
 
     }
 }
