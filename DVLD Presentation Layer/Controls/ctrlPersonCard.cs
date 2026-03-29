@@ -19,7 +19,7 @@ namespace DVLD_Presentation_Layer.Controls
         
         public int PersonID
         {
-            get { return PersonID; }
+            get { return _PersonID; }
         }
 
         public ctrlPersonCard()

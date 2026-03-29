@@ -29,6 +29,12 @@ namespace DVLD_Presentation_Layer
             frmManagePeople1.ShowDialog();
         }
 
+        private void tsmiUsers_Click(object sender, EventArgs e)
+        {
+            Form frmManageUsers = new frmManageUsers();
+            frmManageUsers.ShowDialog();
+        }
+
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             // Trigger the event to send data back to Login Form
@@ -36,5 +42,9 @@ namespace DVLD_Presentation_Layer
                 DataBack.Invoke();
         }
 
+        private void tsmiSignOut_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

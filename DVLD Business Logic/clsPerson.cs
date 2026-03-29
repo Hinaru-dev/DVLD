@@ -157,5 +157,10 @@ namespace DVLD_Business_Logic
         {
             return clsPersonData.DeletePerson(PersonID);
         }
+
+        public static bool isPersonExist(string NationalNo)
+        {
+            return (clsPersonData.IsPersonExist(NationalNo));
+        }
     }
 }

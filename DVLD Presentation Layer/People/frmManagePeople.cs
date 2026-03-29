@@ -39,7 +39,7 @@ namespace DVLD_Presentation_Layer
 
         private void cbFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cbFilter.SelectedItem.ToString() == "None")
+            if (cbFilter.SelectedItem.ToString() == enFilter.None.ToString())
                 tbFilter.Visible = false;
             else
                 tbFilter.Visible = true;
@@ -53,7 +53,6 @@ namespace DVLD_Presentation_Layer
             if (tbFilter.Text == "")
             {
                 bs.Filter = string.Empty;
-                dgvPeopleList.DataSource = bs.DataSource;
             }
 
             else
@@ -70,10 +69,9 @@ namespace DVLD_Presentation_Layer
                 // else if its string:
                 else
                     bs.Filter = ColumnToBeFiltered.ToString() + " Like '%" + tbFilter.Text + "%'";
-
-                dgvPeopleList.DataSource = bs.DataSource;
             }
 
+            dgvPeopleList.DataSource = bs.DataSource;
             OnPeopleListUpdated(sender);
         }
 
@@ -85,6 +83,7 @@ namespace DVLD_Presentation_Layer
             // allow only numerical input
             if (ColumnIndex == enFilter.personid)
             {
+                
                 if (!char.IsNumber(e.KeyChar) && !char.IsControl(e.KeyChar))
                 {
                     e.Handled = true;
@@ -92,14 +91,23 @@ namespace DVLD_Presentation_Layer
             }
 
             // prevent numerical input for gender filter
-            if (ColumnIndex == enFilter.personid)
+            if (ColumnIndex == enFilter.gendor)
             {
-                if (!char.IsLetter(e.KeyChar))
+                if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar))
                 {
                     e.Handled = true;
                 }
             }
 
+        }
+
+        private void cbFilter_Validating(object sender, CancelEventArgs e)
+        {
+            if (!cbFilter.Items.Contains(cbFilter.Text))
+            {
+                cbFilter.Text = enFilter.None.ToString();
+                cbFilter_SelectedIndexChanged(sender, EventArgs.Empty);
+            }
         }
 
         // --------------------
@@ -142,8 +150,6 @@ namespace DVLD_Presentation_Layer
 
         private void PopulatePeopleList()
         {
-            // Filling/Refill people's list from db
-            //dgvPeopleList.DataSource = clsPerson.getAllPeople();
             DataTable PeopleList = clsPerson.getAllPeople();
 
             CorrectGenderValues(ref PeopleList);

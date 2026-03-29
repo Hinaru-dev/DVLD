@@ -109,7 +109,7 @@ namespace DVLD_Data_Access
 
             SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString);
 
-            string query = @"Insert Into People
+            string query = @"Insert Into users
                             Values (@PersonID, @Username, @Password, @isActive);
                             Select SCOPE_IDENTITY();";
 
@@ -148,11 +148,13 @@ namespace DVLD_Data_Access
 
             SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString);
 
-            string query = @"UPDATE people
-                             SET personid = @PersonID, Username = @Username, Password = @Password, isActive = @isActive;";
+            string query = @"UPDATE users
+                             SET personid = @PersonID, Username = @Username, Password = @Password, isActive = @isActive
+                             WHERE userid = @UserID;";
 
             SqlCommand command = new SqlCommand(query, connection);
             command.Parameters.AddWithValue("@PersonID", PersonID);
+            command.Parameters.AddWithValue("@UserID", UserID);
             command.Parameters.AddWithValue("@Username", Username);
             command.Parameters.AddWithValue("@Password", Password);
             command.Parameters.AddWithValue("@isActive", isActive);
@@ -280,6 +282,39 @@ namespace DVLD_Data_Access
 
             SqlCommand command = new SqlCommand(query, connection);
             command.Parameters.AddWithValue("@Username", Username);
+
+            try
+            {
+                connection.Open();
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    isFound = reader.HasRows;
+                }
+            }
+            catch (Exception)
+            {
+                isFound = false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return isFound;
+        }
+
+        public static bool IsPersonAUser(int PersonID)
+        {
+            bool isFound = false;
+
+            SqlConnection connection = new SqlConnection(DataAccessSettings.ConnectionString);
+
+            string query = @"SELECT isExist=1 FROM users
+                             WHERE personid = @PersonID;";
+
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@PersonID", PersonID);
 
             try
             {

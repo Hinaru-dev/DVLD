@@ -34,6 +34,10 @@
             this.tsmiDrivers = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiUsers = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiAccountSettings = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCurrentUserInfo = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiChangePassword = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiSignOut = new System.Windows.Forms.ToolStripMenuItem();
             this.applicationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.peopleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.driversToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,6 +48,7 @@
             // 
             // MainMenuStrip
             // 
+            this.MainMenuStrip.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.MainMenuStrip.ImageScalingSize = new System.Drawing.Size(64, 64);
             this.MainMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiApplications,
@@ -53,7 +58,8 @@
             this.tsmiAccountSettings});
             this.MainMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.MainMenuStrip.Name = "MainMenuStrip";
-            this.MainMenuStrip.Size = new System.Drawing.Size(1006, 72);
+            this.MainMenuStrip.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
+            this.MainMenuStrip.Size = new System.Drawing.Size(1132, 72);
             this.MainMenuStrip.TabIndex = 0;
             this.MainMenuStrip.Text = "MainMenuStrip";
             // 
@@ -61,14 +67,14 @@
             // 
             this.tsmiApplications.Image = global::DVLD_Presentation_Layer.Properties.Resources.Applications_64;
             this.tsmiApplications.Name = "tsmiApplications";
-            this.tsmiApplications.Size = new System.Drawing.Size(168, 68);
+            this.tsmiApplications.Size = new System.Drawing.Size(190, 68);
             this.tsmiApplications.Text = "Applications";
             // 
             // tsmiPeople
             // 
             this.tsmiPeople.Image = global::DVLD_Presentation_Layer.Properties.Resources.People_64;
             this.tsmiPeople.Name = "tsmiPeople";
-            this.tsmiPeople.Size = new System.Drawing.Size(131, 68);
+            this.tsmiPeople.Size = new System.Drawing.Size(145, 68);
             this.tsmiPeople.Text = "People";
             this.tsmiPeople.Click += new System.EventHandler(this.tsmiPeople_Click);
             // 
@@ -76,22 +82,58 @@
             // 
             this.tsmiDrivers.Image = global::DVLD_Presentation_Layer.Properties.Resources.Drivers_64;
             this.tsmiDrivers.Name = "tsmiDrivers";
-            this.tsmiDrivers.Size = new System.Drawing.Size(131, 68);
+            this.tsmiDrivers.Size = new System.Drawing.Size(147, 68);
             this.tsmiDrivers.Text = "Drivers";
             // 
             // tsmiUsers
             // 
             this.tsmiUsers.Image = global::DVLD_Presentation_Layer.Properties.Resources.Users_2_64;
             this.tsmiUsers.Name = "tsmiUsers";
-            this.tsmiUsers.Size = new System.Drawing.Size(120, 68);
+            this.tsmiUsers.Size = new System.Drawing.Size(135, 68);
             this.tsmiUsers.Text = "Users";
+            this.tsmiUsers.Click += new System.EventHandler(this.tsmiUsers_Click);
             // 
             // tsmiAccountSettings
             // 
+            this.tsmiAccountSettings.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiCurrentUserInfo,
+            this.tsmiChangePassword,
+            this.toolStripSeparator1,
+            this.tsmiSignOut});
             this.tsmiAccountSettings.Image = global::DVLD_Presentation_Layer.Properties.Resources.account_settings_64;
             this.tsmiAccountSettings.Name = "tsmiAccountSettings";
-            this.tsmiAccountSettings.Size = new System.Drawing.Size(196, 68);
+            this.tsmiAccountSettings.Size = new System.Drawing.Size(226, 68);
             this.tsmiAccountSettings.Text = "Account Settings";
+            // 
+            // tsmiCurrentUserInfo
+            // 
+            this.tsmiCurrentUserInfo.Image = global::DVLD_Presentation_Layer.Properties.Resources.PersonDetails_32;
+            this.tsmiCurrentUserInfo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsmiCurrentUserInfo.Name = "tsmiCurrentUserInfo";
+            this.tsmiCurrentUserInfo.Size = new System.Drawing.Size(262, 42);
+            this.tsmiCurrentUserInfo.Text = "Current User Info";
+            // 
+            // tsmiChangePassword
+            // 
+            this.tsmiChangePassword.Image = global::DVLD_Presentation_Layer.Properties.Resources.Password_32;
+            this.tsmiChangePassword.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsmiChangePassword.Name = "tsmiChangePassword";
+            this.tsmiChangePassword.Size = new System.Drawing.Size(262, 42);
+            this.tsmiChangePassword.Text = "Change Password";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(259, 6);
+            // 
+            // tsmiSignOut
+            // 
+            this.tsmiSignOut.Image = global::DVLD_Presentation_Layer.Properties.Resources.sign_out_32__2;
+            this.tsmiSignOut.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsmiSignOut.Name = "tsmiSignOut";
+            this.tsmiSignOut.Size = new System.Drawing.Size(262, 42);
+            this.tsmiSignOut.Text = "Sign Out";
+            this.tsmiSignOut.Click += new System.EventHandler(this.tsmiSignOut_Click);
             // 
             // applicationToolStripMenuItem
             // 
@@ -130,12 +172,13 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::DVLD_Presentation_Layer.Properties.Resources.dvld_main_background_min;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1006, 721);
+            this.ClientSize = new System.Drawing.Size(1132, 901);
             this.Controls.Add(this.MainMenuStrip);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Form1";
             this.Text = "Form1";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
@@ -159,6 +202,10 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiDrivers;
         private System.Windows.Forms.ToolStripMenuItem tsmiUsers;
         private System.Windows.Forms.ToolStripMenuItem tsmiAccountSettings;
+        private System.Windows.Forms.ToolStripMenuItem tsmiCurrentUserInfo;
+        private System.Windows.Forms.ToolStripMenuItem tsmiChangePassword;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem tsmiSignOut;
     }
 }
 

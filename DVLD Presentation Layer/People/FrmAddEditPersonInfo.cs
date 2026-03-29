@@ -97,7 +97,7 @@ namespace DVLD_Presentation_Layer
             }
             else
             {
-                MessageBox.Show("No Person Found With that ID.", "Saving Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("No Person Found With that ID.", "Unknown Person ID", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Dispose();
             }
         }
@@ -132,7 +132,7 @@ namespace DVLD_Presentation_Layer
         {
             TextBox tb = (TextBox)sender;
             
-            if(clsPerson.Find(tb.Text) != null)
+            if(clsPerson.isPersonExist(tb.Text))
             {
                 e.Cancel = true;
                 tb.Focus();
@@ -335,6 +335,9 @@ namespace DVLD_Presentation_Layer
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            // can be added later 
+            // function revoke refresh list only in case of changes
+
             if (Mode == enMode.AddNew)
                 Person = clsPerson.getNewPersonObject();
 

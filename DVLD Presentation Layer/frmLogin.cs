@@ -117,7 +117,7 @@ namespace DVLD_Presentation_Layer
             else
             {
                 // maybe should do someothing if validation wrong or limit trials count
-                MessageBox.Show("Invalid Credentials", "Login Failed!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Invalid Username/Password.", "Wrong Credentials", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

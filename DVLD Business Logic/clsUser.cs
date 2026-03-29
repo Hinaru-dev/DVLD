@@ -1,9 +1,10 @@
-﻿using System;
+﻿using DVLD_Data_Access;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DVLD_Data_Access;
 
 namespace DVLD_Business_Logic
 {
@@ -12,8 +13,8 @@ namespace DVLD_Business_Logic
         enum enMode { AddNewMode = 0, UpdateMode = 1 };
         enMode Mode;
 
-        public int UserID { get; set; }
         public int PersonID { get; set; }
+        public int UserID { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
         public bool isActive { get; set; }
@@ -27,10 +28,10 @@ namespace DVLD_Business_Logic
             isActive = true;
         }
 
-        clsUser(int UserID, int PersonID, string Username, string Password, bool isActive)
+        clsUser(int PersonID, int UserID, string Personname, string Password, bool isActive)
         {
+            this.PersonID = UserID;
             this.UserID = UserID;
-            this.PersonID = PersonID;
             this.Username = Username;
             this.Password = Password;
             this.isActive = isActive;
@@ -55,7 +56,7 @@ namespace DVLD_Business_Logic
             bool isActive = true;
 
 
-            bool isFound = clsUserData.GetUserInfoByID(UserID, ref PersonID, ref Username, ref Password, ref isActive);
+            bool isFound = clsUserData.GetUserInfoByID(UserID, ref UserID, ref Username, ref Password, ref isActive);
 
 
             if (isFound)
@@ -72,7 +73,7 @@ namespace DVLD_Business_Logic
             bool isActive = true;
 
 
-            bool isfound = clsUserData.GetUserInfoByUsername(Username, ref UserID, ref PersonID, ref Password, ref isActive);
+            bool isfound = clsUserData.GetUserInfoByUsername(Username, ref UserID, ref UserID, ref Password, ref isActive);
 
 
             if (isfound)
@@ -99,7 +100,10 @@ namespace DVLD_Business_Logic
             {
                 case enMode.AddNewMode:
                     if (_AddNewUser())
+                    {
+                        Mode = enMode.UpdateMode;
                         return true;
+                    }
                     else
                         return false;
 
@@ -112,6 +116,37 @@ namespace DVLD_Business_Logic
                 default:
                     return false;
             }
+        }
+
+        public static DataTable getAllUsers()
+        {
+            return clsUserData.GetAllUsers();
+        }
+
+        public static clsUser getNewUserObject()
+        {
+            return new clsUser();
+        }
+
+        public bool Delete(int UserID)
+        {
+            return clsUserData.DeleteUser(UserID);
+        }
+
+        public static string getUserFullname(int personID)
+        {
+            clsPerson Person = clsPerson.Find(personID);
+            return Person.FullName();
+        }
+
+        public static bool isPersonAUser(int personID)
+        {
+            return clsUserData.IsPersonAUser(personID);
+        }
+    
+        public static bool isUserExist(string username)
+        {
+            return (clsUserData.IsUserExist(username));
         }
     }
 }

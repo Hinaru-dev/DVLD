@@ -13,6 +13,9 @@ namespace DVLD_Presentation_Layer.Controls
 {
     public partial class ctrlPersonCardWithFilter : UserControl
     {
+        enum enfilter { PersonID = 0, NationalNo = 1}
+        public int PersonID = -1;
+
         public ctrlPersonCardWithFilter()
         {
             InitializeComponent();
@@ -20,22 +23,37 @@ namespace DVLD_Presentation_Layer.Controls
 
         private void btnFindPerson_Click(object sender, EventArgs e)
         {
-            switch (cbFindPersonFilter.SelectedIndex)
+            switch ((enfilter)cbFindPersonFilter.SelectedIndex)
             {
-                case 0:
+                case enfilter.PersonID:
                     ctrlPersonCard1.LoadPersonInfo(int.Parse(tbFindPerson.Text));
-                    return;
-                case 1:
+                    break;
+                case enfilter.NationalNo:
                     ctrlPersonCard1.LoadPersonInfo(tbFindPerson.Text);
-                    return;
+                    break;
                 default:
                     return;
             }
+
+            PersonID = ctrlPersonCard1.PersonID;
         }
 
         private void btnAddNewPerson_Click(object sender, EventArgs e)
         {
-            // open adding person Form
+            AddNewPerson();
+        }
+
+        private void AddNewPerson()
+        {
+            FrmAddEditPersonInfo frmAddEditPersonInfo = new FrmAddEditPersonInfo();
+            frmAddEditPersonInfo.ShowDialog();
+        }
+
+        public void FillPersonInfo(int personID)
+        {
+            cbFindPersonFilter.SelectedIndex = (int)enfilter.PersonID;
+            tbFindPerson.Text = personID.ToString();
+            btnFindPerson_Click(btnFindPerson, EventArgs.Empty);
         }
     }
 }
