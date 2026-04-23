@@ -19,12 +19,39 @@ namespace DVLD_Presentation_Layer.Controls
 
         public int UserID
         {
-            get { return UserID; }
+            get { return _UserID; }
         }
+
+        // -----------------------------------
+        //  notify on person info card update
+        // -----------------------------------
+
+        // Declare a delegate
+        public delegate void DataBackEventHandler(object sender, bool RefreshPeopleList);
+
+        // Declare an event using the delegate
+        public event DataBackEventHandler DataBack;
+
+        void OnPersonInfoUpdate(object sender, bool needListRefresh = false)
+        {
+            // Trigger the event to send data back to previous forms
+            bool refreshPeopleList = needListRefresh;
+            if (DataBack != null)
+                DataBack.Invoke(this, refreshPeopleList);
+        }
+
+        private void subToPersonInfoUpdate()
+        {
+            ctrlPersonCard1.DataBack += OnPersonInfoUpdate;
+        }
+
+        // -----------------------------------
+        // -----------------------------------
 
         public ctrlUserCard()
         {
             InitializeComponent();
+            subToPersonInfoUpdate();
         }
 
         public void LoadUserInfo(int UserID)
@@ -68,7 +95,8 @@ namespace DVLD_Presentation_Layer.Controls
             lblUsername.Text = "???";
             lblIsActive.Text = "???";
 
-            ctrlPersonCard1.LoadPersonInfo(_UserID);  
+            // sending userid (-1) to get invalid personid and reset personcard
+            ctrlPersonCard1.ResetPersonInfo();  
         }
     }
 }

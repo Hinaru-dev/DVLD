@@ -216,7 +216,7 @@ namespace DVLD_Presentation_Layer
         private void ShowPersonDetails(int PersonID)
         {
             frmPersonCardDetails frmPersonCardDetails = new frmPersonCardDetails(PersonID);
-            frmPersonCardDetails.DataBack += OnPeopleListUpdated;
+            frmPersonCardDetails.ctrlPersonCard1.DataBack += OnPeopleListUpdated;
             frmPersonCardDetails.ShowDialog();
         }
 

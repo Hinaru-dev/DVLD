@@ -1,6 +1,6 @@
 ﻿namespace DVLD_Presentation_Layer
 {
-    partial class frmPersonCardDetails
+    partial class frmUserCardDetails
     {
         /// <summary>
         /// Required designer variable.
@@ -28,64 +28,48 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ctrlPersonCard1 = new DVLD_Presentation_Layer.Controls.ctrlPersonCard();
+            this.ctrlUserCard1 = new DVLD_Presentation_Layer.Controls.ctrlUserCard();
             this.btnClose = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // ctrlPersonCard1
+            // ctrlUserCard1
             // 
-            this.ctrlPersonCard1.Location = new System.Drawing.Point(14, 112);
-            this.ctrlPersonCard1.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
-            this.ctrlPersonCard1.Name = "ctrlPersonCard1";
-            this.ctrlPersonCard1.Size = new System.Drawing.Size(734, 274);
-            this.ctrlPersonCard1.TabIndex = 0;
+            this.ctrlUserCard1.Location = new System.Drawing.Point(21, 24);
+            this.ctrlUserCard1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.ctrlUserCard1.Name = "ctrlUserCard1";
+            this.ctrlUserCard1.Size = new System.Drawing.Size(742, 400);
+            this.ctrlUserCard1.TabIndex = 1;
             // 
             // btnClose
             // 
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClose.Image = global::DVLD_Presentation_Layer.Properties.Resources.Close_32;
             this.btnClose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnClose.Location = new System.Drawing.Point(615, 396);
+            this.btnClose.Location = new System.Drawing.Point(630, 432);
             this.btnClose.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(132, 40);
-            this.btnClose.TabIndex = 9;
-            this.btnClose.Text = "  Close";
+            this.btnClose.Size = new System.Drawing.Size(133, 41);
+            this.btnClose.TabIndex = 10;
+            this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold);
-            this.label1.ForeColor = System.Drawing.Color.Crimson;
-            this.label1.Location = new System.Drawing.Point(281, 50);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(213, 32);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "Person Details";
-            // 
-            // frmPersonCardDetails
+            // frmUserCardDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(770, 454);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(773, 488);
             this.Controls.Add(this.btnClose);
-            this.Controls.Add(this.ctrlPersonCard1);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.Name = "frmPersonCardDetails";
-            this.Text = "frmPeronCardDetails";
+            this.Controls.Add(this.ctrlUserCard1);
+            this.Name = "frmUserCardDetails";
+            this.Text = "User Info";
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        public Controls.ctrlPersonCard ctrlPersonCard1;
+        private Controls.ctrlUserCard ctrlUserCard1;
         private System.Windows.Forms.Button btnClose;
-        private System.Windows.Forms.Label label1;
     }
 }

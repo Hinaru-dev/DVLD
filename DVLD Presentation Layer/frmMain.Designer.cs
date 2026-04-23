@@ -1,6 +1,6 @@
 ﻿namespace DVLD_Presentation_Layer
 {
-    partial class Form1
+    partial class frmMain
     {
         /// <summary>
         /// Required designer variable.
@@ -110,28 +110,30 @@
             this.tsmiCurrentUserInfo.Image = global::DVLD_Presentation_Layer.Properties.Resources.PersonDetails_32;
             this.tsmiCurrentUserInfo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsmiCurrentUserInfo.Name = "tsmiCurrentUserInfo";
-            this.tsmiCurrentUserInfo.Size = new System.Drawing.Size(262, 42);
+            this.tsmiCurrentUserInfo.Size = new System.Drawing.Size(278, 42);
             this.tsmiCurrentUserInfo.Text = "Current User Info";
+            this.tsmiCurrentUserInfo.Click += new System.EventHandler(this.tsmiCurrentUserInfo_Click);
             // 
             // tsmiChangePassword
             // 
             this.tsmiChangePassword.Image = global::DVLD_Presentation_Layer.Properties.Resources.Password_32;
             this.tsmiChangePassword.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsmiChangePassword.Name = "tsmiChangePassword";
-            this.tsmiChangePassword.Size = new System.Drawing.Size(262, 42);
+            this.tsmiChangePassword.Size = new System.Drawing.Size(278, 42);
             this.tsmiChangePassword.Text = "Change Password";
+            this.tsmiChangePassword.Click += new System.EventHandler(this.tsmiChangePassword_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(259, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(275, 6);
             // 
             // tsmiSignOut
             // 
             this.tsmiSignOut.Image = global::DVLD_Presentation_Layer.Properties.Resources.sign_out_32__2;
             this.tsmiSignOut.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsmiSignOut.Name = "tsmiSignOut";
-            this.tsmiSignOut.Size = new System.Drawing.Size(262, 42);
+            this.tsmiSignOut.Size = new System.Drawing.Size(278, 42);
             this.tsmiSignOut.Text = "Sign Out";
             this.tsmiSignOut.Click += new System.EventHandler(this.tsmiSignOut_Click);
             // 
@@ -170,7 +172,7 @@
             this.accountSettingsToolStripMenuItem.Size = new System.Drawing.Size(196, 68);
             this.accountSettingsToolStripMenuItem.Text = "Account Settings";
             // 
-            // Form1
+            // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -179,7 +181,7 @@
             this.ClientSize = new System.Drawing.Size(1132, 901);
             this.Controls.Add(this.MainMenuStrip);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.Name = "Form1";
+            this.Name = "frmMain";
             this.Text = "Form1";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.MainMenuStrip.ResumeLayout(false);

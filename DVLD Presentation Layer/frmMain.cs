@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace DVLD_Presentation_Layer
 {
-    public partial class Form1 : Form
+    public partial class frmMain : Form
     {        
         // Declare a delegate
         public delegate void DataBackEventHandler();
@@ -18,10 +18,30 @@ namespace DVLD_Presentation_Layer
         // Declare an event using the delegate
         public event DataBackEventHandler DataBack;
 
-        public Form1()
+        public frmMain()
         {
             InitializeComponent();
         }
+
+        // ---------------------------------
+        //         custom functions
+        // ---------------------------------
+
+        private void ShowUserDetails(int UserID)
+        {
+            frmUserCardDetails frmUserCardDetails = new frmUserCardDetails(UserID);
+            frmUserCardDetails.ShowDialog();
+        }
+
+        private void changeUserPassword(int UserID)
+        {
+            frmChangePassword frmChangePassword = new frmChangePassword(UserID);
+            frmChangePassword.ShowDialog();
+        }
+
+        // ---------------------------------
+        //         controls' events
+        // ---------------------------------
 
         private void tsmiPeople_Click(object sender, EventArgs e)
         {
@@ -46,5 +66,15 @@ namespace DVLD_Presentation_Layer
         {
             this.Close();
         }
+
+        private void tsmiCurrentUserInfo_Click(object sender, EventArgs e)
+        {
+            ShowUserDetails(clsGlobalUser.CurrentUser.UserID);
+        }
+
+        private void tsmiChangePassword_Click(object sender, EventArgs e)
+        {
+            changeUserPassword(clsGlobalUser.CurrentUser.UserID);
+        }       
     }
 }

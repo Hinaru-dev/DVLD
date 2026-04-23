@@ -45,7 +45,7 @@ namespace DVLD_Presentation_Layer
             {
                 string LoginString = File.ReadAllText(filePath);
 
-                if (string.IsNullOrEmpty(LoginString))
+                if (LoginString == null)
                 {
                     MessageBox.Show("Login Info is Null or empty!!", "TemporaryError Loading remembered Login Info", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
@@ -61,7 +61,7 @@ namespace DVLD_Presentation_Layer
 
         private bool _isValidUserLogin()
         {
-            return clsUser.ValidateLoginInfo(tbUsername.Text, tbPassword.Text);
+            return clsUser.isValidLoginInfo(tbUsername.Text, tbPassword.Text);
         }
 
         // no boolean return here since this file is a cache file that won't show exception when trying to save in it
@@ -104,10 +104,12 @@ namespace DVLD_Presentation_Layer
         {
             if (_isValidUserLogin())
             {
-                this.Visible = false;
-                Form1 MainForm = new Form1();
+                this.Visible = false; 
+                frmMain MainForm = new frmMain();
                 MainForm.DataBack += MainFormClosed;
                 MainForm.Show();
+
+                clsGlobalUser.CurrentUser = clsUser.Find(tbUsername.Text);
 
                 if (cbRememberMe.Checked)
                     _SaveLoginInfo();

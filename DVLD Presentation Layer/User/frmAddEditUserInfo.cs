@@ -27,37 +27,78 @@ namespace DVLD_Presentation_Layer
 
         private enMode Mode;
 
+        private void _subToUserPersonalInfoChangeEvent()
+        {
+            ctrlPersonCardWithFilter1.DataBack += _OnUsersPersonalInformationUpdate;
+        }
+
+        private void _SetFormLabel()
+        {
+            this.Text = "Update User";
+            lblAddEditPersonInfo.Text = "Update User";
+        }
+
+        private void _LoadUserPersonalInfo()
+        {
+            // fill user's personal info
+            ctrlPersonCardWithFilter1.FillPersonInfo(User.PersonID);
+            ctrlPersonCardWithFilter1.disableFilter();
+        }
+
+        private void _SetLoginFields(int userID =-1)
+        {
+            switch (Mode)
+            {
+                case enMode.AddNew:
+                    tbUsername.Text = string.Empty;
+                    tbPassword.Text = string.Empty;
+                    tbConfirmPassword.Text = string.Empty;
+                    cbIsActive.Checked = true;
+                    break;
+
+                case enMode.Update:
+                    lblUserID.Text = userID.ToString();
+                    tbUsername.Text = User.Username;
+                    tbPassword.Text = User.Password;
+                    tbConfirmPassword.Text = User.Password;
+                    cbIsActive.Checked = User.isActive;
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        private void _LockPasswordFields()
+        {
+            tbPassword.Enabled = false;
+            tbConfirmPassword.Enabled = false;
+        }
+
         public frmAddEditUserInfo()
         {
             InitializeComponent();
+            _subToUserPersonalInfoChangeEvent();
 
             Mode = enMode.AddNew;
 
-            tbUsername.Text = string.Empty;
-            tbPassword.Text = string.Empty;
-            tbConfirmPassword.Text = string.Empty;
-            cbIsActive.Checked = true;
-
-
+            _SetLoginFields();
         }
 
         public frmAddEditUserInfo(int userID)
         {
             InitializeComponent();
+            _subToUserPersonalInfoChangeEvent();
 
             Mode = enMode.Update;
             User = clsUser.Find(userID);
 
             if (User != null)
             {
-                lblUserID.Text = userID.ToString();
-                tbUsername.Text = User.Username;
-                tbPassword.Text = User.Password;
-                tbConfirmPassword.Text = string.Empty;
-                cbIsActive.Checked = User.isActive;
-
-                // fill user's personal info
-                ctrlPersonCardWithFilter1.FillPersonInfo(User.PersonID);
+                _SetFormLabel();
+                _SetLoginFields(userID);
+                _LoadUserPersonalInfo();
+                _LockPasswordFields();
             }
             else
             {
@@ -111,6 +152,7 @@ namespace DVLD_Presentation_Layer
                 epEmptyInputField.SetError(tb, "");
             }
         }
+
         private void _PasswordsNotMatchingError(object sender, CancelEventArgs e)
         {
             TextBox tb = (TextBox)sender;
@@ -161,8 +203,15 @@ namespace DVLD_Presentation_Layer
             User.Username = tbUsername.Text;
             User.PersonID = ctrlPersonCardWithFilter1.PersonID;
             User.Password = tbPassword.Text;
-            // new accounts are should be active
             User.isActive = cbIsActive.Checked;
+        }
+
+        private void _OnUsersPersonalInformationUpdate(object sender, bool usersListneedrefresh=false)
+        {
+            // Trigger the event to send data back to previous forms
+            bool refreshUsersList = usersListneedrefresh;
+            if (DataBack != null)
+                DataBack.Invoke(this, refreshUsersList);
         }
 
         // -----------------------------------
@@ -189,11 +238,17 @@ namespace DVLD_Presentation_Layer
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            // can be added later 
-            // function revoke refresh list only in case of changes
-
             if (Mode == enMode.AddNew)
+            {
                 User = clsUser.getNewUserObject();
+
+                // mew accounts should be active:
+                // won't rely on client input
+                // force it and prevent wrong filling input field message ambiguity
+                if (!cbIsActive.Checked)
+                    if(MessageBox.Show("new user account must be active, isActive is now checked!", "Invalid account creation parameter \"isActive\"", MessageBoxButtons.OK, MessageBoxIcon.Warning) == DialogResult.OK)
+                        cbIsActive.Checked = true;
+            }
 
             if (_isValidInput())
             {
@@ -210,16 +265,15 @@ namespace DVLD_Presentation_Layer
                 }
                 else
                     MessageBox.Show("Failed to Save User Info.", "Saving Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                // Trigger the event to send data back to previous forms
+                bool refreshUsersList = true;
+                if (DataBack != null)
+                    DataBack.Invoke(this, refreshUsersList);
             }
 
             else
                 MessageBox.Show("Please Make Sure to fill needed Input Fields Properly Before Saving", "Invalid Saving", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-
-            // Trigger the event to send data back to Form1
-            bool refreshUsersList = true;
-            if (DataBack != null)
-                DataBack.Invoke(this, refreshUsersList);
         }
 
         private void btnClose_Click(object sender, EventArgs e)

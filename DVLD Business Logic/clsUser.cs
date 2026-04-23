@@ -28,10 +28,12 @@ namespace DVLD_Business_Logic
             isActive = true;
         }
 
-        clsUser(int PersonID, int UserID, string Personname, string Password, bool isActive)
+        clsUser(int UserID, int PersonID, string Username, string Password, bool isActive)
         {
-            this.PersonID = UserID;
+            Mode = enMode.UpdateMode;
+
             this.UserID = UserID;
+            this.PersonID = PersonID;
             this.Username = Username;
             this.Password = Password;
             this.isActive = isActive;
@@ -56,7 +58,7 @@ namespace DVLD_Business_Logic
             bool isActive = true;
 
 
-            bool isFound = clsUserData.GetUserInfoByID(UserID, ref UserID, ref Username, ref Password, ref isActive);
+            bool isFound = clsUserData.GetUserInfoByID(UserID, ref PersonID, ref Username, ref Password, ref isActive);
 
 
             if (isFound)
@@ -73,7 +75,7 @@ namespace DVLD_Business_Logic
             bool isActive = true;
 
 
-            bool isfound = clsUserData.GetUserInfoByUsername(Username, ref UserID, ref UserID, ref Password, ref isActive);
+            bool isfound = clsUserData.GetUserInfoByUsername(Username, ref UserID, ref PersonID, ref Password, ref isActive);
 
 
             if (isfound)
@@ -83,7 +85,7 @@ namespace DVLD_Business_Logic
             return null;
         }
 
-        public static bool ValidateLoginInfo(String Username, string password)
+        public static bool isValidLoginInfo(String Username, string password)
         {
             clsUser user = clsUser.Find(Username);
 

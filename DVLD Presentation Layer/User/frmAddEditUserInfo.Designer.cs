@@ -32,7 +32,6 @@
             this.tcPerson = new System.Windows.Forms.TabControl();
             this.tpPersonalInfo = new System.Windows.Forms.TabPage();
             this.btnNext = new System.Windows.Forms.Button();
-            this.ctrlPersonCardWithFilter1 = new DVLD_Presentation_Layer.Controls.ctrlPersonCardWithFilter();
             this.tpLoginInfo = new System.Windows.Forms.TabPage();
             this.lblUserID = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -52,6 +51,7 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.ErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.epEmptyInputField = new System.Windows.Forms.ErrorProvider(this.components);
+            this.ctrlPersonCardWithFilter1 = new DVLD_Presentation_Layer.Controls.ctrlPersonCardWithFilter();
             this.tcPerson.SuspendLayout();
             this.tpPersonalInfo.SuspendLayout();
             this.tpLoginInfo.SuspendLayout();
@@ -98,14 +98,6 @@
             this.btnNext.Text = "Next";
             this.btnNext.UseVisualStyleBackColor = true;
             this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
-            // 
-            // ctrlPersonCardWithFilter1
-            // 
-            this.ctrlPersonCardWithFilter1.Location = new System.Drawing.Point(15, 16);
-            this.ctrlPersonCardWithFilter1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.ctrlPersonCardWithFilter1.Name = "ctrlPersonCardWithFilter1";
-            this.ctrlPersonCardWithFilter1.Size = new System.Drawing.Size(758, 369);
-            this.ctrlPersonCardWithFilter1.TabIndex = 16;
             // 
             // tpLoginInfo
             // 
@@ -277,9 +269,9 @@
             this.lblAddEditPersonInfo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblAddEditPersonInfo.Location = new System.Drawing.Point(274, 51);
             this.lblAddEditPersonInfo.Name = "lblAddEditPersonInfo";
-            this.lblAddEditPersonInfo.Size = new System.Drawing.Size(275, 45);
+            this.lblAddEditPersonInfo.Size = new System.Drawing.Size(240, 45);
             this.lblAddEditPersonInfo.TabIndex = 15;
-            this.lblAddEditPersonInfo.Text = "Add New Person";
+            this.lblAddEditPersonInfo.Text = "Add New User";
             // 
             // btnClose
             // 
@@ -317,6 +309,14 @@
             // 
             this.epEmptyInputField.ContainerControl = this;
             // 
+            // ctrlPersonCardWithFilter1
+            // 
+            this.ctrlPersonCardWithFilter1.Location = new System.Drawing.Point(15, 16);
+            this.ctrlPersonCardWithFilter1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.ctrlPersonCardWithFilter1.Name = "ctrlPersonCardWithFilter1";
+            this.ctrlPersonCardWithFilter1.Size = new System.Drawing.Size(758, 369);
+            this.ctrlPersonCardWithFilter1.TabIndex = 16;
+            // 
             // frmAddEditUserInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -330,7 +330,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmAddEditUserInfo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmAddEditUserInfo";
+            this.Text = "Add New User";
             this.tcPerson.ResumeLayout(false);
             this.tpPersonalInfo.ResumeLayout(false);
             this.tpLoginInfo.ResumeLayout(false);

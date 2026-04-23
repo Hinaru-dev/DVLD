@@ -30,7 +30,7 @@ namespace DVLD_Data_Access
 
                 if (reader.Read())
                 {
-                    // personID = int.Parse(reader["personid"].ToString());
+                    // PersonID = int.Parse(reader["personid"].ToString());
                     int.TryParse(reader["personid"].ToString(), out PersonID);
                     Username = reader["username"].ToString();
                     Password = reader["password"].ToString();

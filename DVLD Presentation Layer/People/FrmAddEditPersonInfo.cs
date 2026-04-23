@@ -353,6 +353,12 @@ namespace DVLD_Presentation_Layer
                     lblPersonID.Text = Person.PersonID.ToString();
 
                     MessageBox.Show("saved Successfully!", "Saving Succeeded", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+
+                    // Trigger the event to send data back to preious form(s)
+                    bool refreshPeopleList = true;
+                    if (DataBack != null)
+                        DataBack.Invoke(this, refreshPeopleList);
                 }
                 else
                     MessageBox.Show("Failed to Save Person Info.", "Saving Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -360,12 +366,6 @@ namespace DVLD_Presentation_Layer
 
             else
                 MessageBox.Show("Please Make Sure to fill needed Input Fields Properly Before Saving", "Invalid Saving", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-            
-            // Trigger the event to send data back to Form1
-            bool refreshPeopleList = true;
-            if (DataBack != null)
-                DataBack.Invoke(this, refreshPeopleList);
         }
 
         private void btnClose_Click(object sender, EventArgs e)

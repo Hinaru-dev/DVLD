@@ -16,9 +16,36 @@ namespace DVLD_Presentation_Layer.Controls
         enum enfilter { PersonID = 0, NationalNo = 1}
         public int PersonID = -1;
 
+        // -----------------------------------
+        //  notify on person info card update
+        // -----------------------------------
+
+        // Declare a delegate
+        public delegate void DataBackEventHandler(object sender, bool RefreshPeopleList);
+
+        // Declare an event using the delegate
+        public event DataBackEventHandler DataBack;
+
+        void OnPersonInfoUpdate(object sender, bool needListRefresh = false)
+        {
+            // Trigger the event to send data back to previous forms
+            bool refreshPeopleList = needListRefresh;
+            if (DataBack != null)
+                DataBack.Invoke(this, refreshPeopleList);
+        }
+
+        private void subToPersonInfoUpdate()
+        {
+            ctrlPersonCard1.DataBack += OnPersonInfoUpdate;
+        }
+
+        // -----------------------------------
+        // -----------------------------------
+
         public ctrlPersonCardWithFilter()
         {
             InitializeComponent();
+            subToPersonInfoUpdate();
         }
 
         private void btnFindPerson_Click(object sender, EventArgs e)
@@ -54,6 +81,11 @@ namespace DVLD_Presentation_Layer.Controls
             cbFindPersonFilter.SelectedIndex = (int)enfilter.PersonID;
             tbFindPerson.Text = personID.ToString();
             btnFindPerson_Click(btnFindPerson, EventArgs.Empty);
+        }
+
+        public void disableFilter()
+        {
+            gbFilter.Enabled = false;
         }
     }
 }

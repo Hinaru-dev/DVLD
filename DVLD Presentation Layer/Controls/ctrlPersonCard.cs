@@ -22,6 +22,12 @@ namespace DVLD_Presentation_Layer.Controls
             get { return _PersonID; }
         }
 
+        // Declare a delegate
+        public delegate void DataBackEventHandler(object sender, bool RefreshPeopleList);
+
+        // Declare an event using the delegate
+        public event DataBackEventHandler DataBack;
+
         public ctrlPersonCard()
         {
             InitializeComponent();
@@ -49,6 +55,11 @@ namespace DVLD_Presentation_Layer.Controls
             }
             else
                 _FillPersonInfo();
+        }
+
+        public void ResetPersonInfo()
+        {
+            _ResetPersonInfo();
         }
 
         private void _FillPersonInfo()
@@ -92,6 +103,8 @@ namespace DVLD_Presentation_Layer.Controls
                 if (_Person.ImagePath != string.Empty && _Person.ImagePath != null)
                     MessageBox.Show("Couldn't find this image: " + _Person.ImagePath, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+            lnklblEditPersonInfo.Enabled = true;
         }
 
         private void _ResetPersonInfo()
@@ -108,6 +121,25 @@ namespace DVLD_Presentation_Layer.Controls
             lblPhone.Text = "[????]";
             lblCountry.Text = "[????]";
             pbPersonPhoto.Image = Properties.Resources.manQuestion;
+            lnklblEditPersonInfo.Enabled = false;
+        }
+        private void OnPeopleListUpdated(object sender, bool needListRefresh = false)
+        {
+            // reload person data if needed
+            if (needListRefresh)
+                LoadPersonInfo(_PersonID);
+
+            // Trigger the event to send data back to previous forms
+            bool refreshPeopleList = needListRefresh;
+            if (DataBack != null)
+                DataBack.Invoke(this, refreshPeopleList);
+        }
+
+        private void lnklblEditPersonInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            FrmAddEditPersonInfo edit = new FrmAddEditPersonInfo(_PersonID);
+            edit.DataBack += OnPeopleListUpdated;
+            edit.ShowDialog();
         }
     }
 }

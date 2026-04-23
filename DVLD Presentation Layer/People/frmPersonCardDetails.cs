@@ -29,6 +29,8 @@ namespace DVLD_Presentation_Layer
             InitializeComponent();
 
             ctrlPersonCard1.LoadPersonInfo(_PersonID);
+            //subscribe to card people update event 
+            ctrlPersonCard1.DataBack += OnPeopleListUpdated;
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -40,16 +42,9 @@ namespace DVLD_Presentation_Layer
         private void OnPeopleListUpdated(object sender, bool needListRefresh = false)
         {
             // Trigger the event to send data back to Form1
-            bool refreshPeopleList = true;
+            bool refreshPeopleList = needListRefresh;
             if (DataBack != null)
                 DataBack.Invoke(this, refreshPeopleList);   
-        }
-
-        private void lnklblEditPersonInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            FrmAddEditPersonInfo edit = new FrmAddEditPersonInfo(_PersonID);
-            edit.DataBack += OnPeopleListUpdated;
-            edit.ShowDialog();
         }
     }
 }
