@@ -34,14 +34,16 @@ namespace DVLD_Presentation_Layer
             _loadCountriesList();
             
             _RestrictPersonAgePicker();
+
+            _SetFormLabel();
         }
 
         public FrmAddEditPersonInfo()
         {
+            Mode = enMode.AddNew;
+            
             _InitializeForm();
             
-            Mode = enMode.AddNew;
-
             tbEmail.Text = string.Empty;
             tbFirstName.Text = string.Empty;
             tbSecondName.Text = string.Empty;
@@ -54,9 +56,10 @@ namespace DVLD_Presentation_Layer
 
         public FrmAddEditPersonInfo(int PersonID)
         {
+            Mode = enMode.Update;
+            
             _InitializeForm();
 
-            Mode = enMode.Update;
             Person = clsPerson.Find(PersonID);
 
             if (Person != null)
@@ -126,6 +129,11 @@ namespace DVLD_Presentation_Layer
         private void _RestrictPersonAgePicker()
         { 
             dtpDateOfBirth.MaxDate = _getDateRestrictedByLegalAge();
+        }
+
+        private void _SetFormLabel()
+        {
+            lblAddEditPersonInfo.Text = Mode == enMode.Update ? "Edit Person Info" : "Add New Person"; 
         }
 
         private void _InputAlreadyExistsError(object sender, CancelEventArgs e)
