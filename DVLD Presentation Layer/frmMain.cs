@@ -75,6 +75,12 @@ namespace DVLD_Presentation_Layer
         private void tsmiChangePassword_Click(object sender, EventArgs e)
         {
             changeUserPassword(clsGlobalUser.CurrentUser.UserID);
-        }       
+        }
+
+        private void tsmiManageApplicationTypes_Click(object sender, EventArgs e)
+        {
+            frmManageApplicationTypes frmManageApplicationTypes = new frmManageApplicationTypes();
+            frmManageApplicationTypes.ShowDialog();
+        }
     }
 }

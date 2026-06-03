@@ -30,6 +30,13 @@
         {
             this.MainMenuStrip = new System.Windows.Forms.MenuStrip();
             this.tsmiApplications = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiDrivingLicenseServices = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiManageApplications = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiDetainLicenses = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiManageApplicationTypes = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiManageTestTypes = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiPeople = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDrivers = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiUsers = new System.Windows.Forms.ToolStripMenuItem();
@@ -64,10 +71,69 @@
             // 
             // tsmiApplications
             // 
+            this.tsmiApplications.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiDrivingLicenseServices,
+            this.toolStripSeparator2,
+            this.tsmiManageApplications,
+            this.toolStripSeparator3,
+            this.tsmiDetainLicenses,
+            this.tsmiManageApplicationTypes,
+            this.tsmiManageTestTypes});
             this.tsmiApplications.Image = global::DVLD_Presentation_Layer.Properties.Resources.Applications_64;
             this.tsmiApplications.Name = "tsmiApplications";
             this.tsmiApplications.Size = new System.Drawing.Size(149, 68);
             this.tsmiApplications.Text = "Applications";
+            // 
+            // tsmiDrivingLicenseServices
+            // 
+            this.tsmiDrivingLicenseServices.Image = global::DVLD_Presentation_Layer.Properties.Resources.LocalDriving_License;
+            this.tsmiDrivingLicenseServices.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsmiDrivingLicenseServices.Name = "tsmiDrivingLicenseServices";
+            this.tsmiDrivingLicenseServices.Size = new System.Drawing.Size(230, 38);
+            this.tsmiDrivingLicenseServices.Text = "Driving License Services";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(227, 6);
+            // 
+            // tsmiManageApplications
+            // 
+            this.tsmiManageApplications.Image = global::DVLD_Presentation_Layer.Properties.Resources.Manage_Applications_32;
+            this.tsmiManageApplications.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsmiManageApplications.Name = "tsmiManageApplications";
+            this.tsmiManageApplications.Size = new System.Drawing.Size(230, 38);
+            this.tsmiManageApplications.Text = "Manage Applications";
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(227, 6);
+            // 
+            // tsmiDetainLicenses
+            // 
+            this.tsmiDetainLicenses.Image = global::DVLD_Presentation_Layer.Properties.Resources.Detain_32;
+            this.tsmiDetainLicenses.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsmiDetainLicenses.Name = "tsmiDetainLicenses";
+            this.tsmiDetainLicenses.Size = new System.Drawing.Size(230, 38);
+            this.tsmiDetainLicenses.Text = "Detain Licenses";
+            // 
+            // tsmiManageApplicationTypes
+            // 
+            this.tsmiManageApplicationTypes.Image = global::DVLD_Presentation_Layer.Properties.Resources.Application_Types_32;
+            this.tsmiManageApplicationTypes.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsmiManageApplicationTypes.Name = "tsmiManageApplicationTypes";
+            this.tsmiManageApplicationTypes.Size = new System.Drawing.Size(230, 38);
+            this.tsmiManageApplicationTypes.Text = "Manage Application Types";
+            this.tsmiManageApplicationTypes.Click += new System.EventHandler(this.tsmiManageApplicationTypes_Click);
+            // 
+            // tsmiManageTestTypes
+            // 
+            this.tsmiManageTestTypes.Image = global::DVLD_Presentation_Layer.Properties.Resources.TestType_32;
+            this.tsmiManageTestTypes.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsmiManageTestTypes.Name = "tsmiManageTestTypes";
+            this.tsmiManageTestTypes.Size = new System.Drawing.Size(230, 38);
+            this.tsmiManageTestTypes.Text = "Manage Test Types";
             // 
             // tsmiPeople
             // 
@@ -207,6 +273,13 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiChangePassword;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem tsmiSignOut;
+        private System.Windows.Forms.ToolStripMenuItem tsmiDrivingLicenseServices;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem tsmiManageApplications;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem tsmiDetainLicenses;
+        private System.Windows.Forms.ToolStripMenuItem tsmiManageApplicationTypes;
+        private System.Windows.Forms.ToolStripMenuItem tsmiManageTestTypes;
     }
 }
 
