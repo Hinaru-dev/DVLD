@@ -42,6 +42,7 @@
     <Compile Include="clsApplicationTypeData.cs" />
     <Compile Include="clsCountryData.cs" />
     <Compile Include="clsPersonData.cs" />
+    <Compile Include="clsTestTypeData.cs" />
     <Compile Include="clsUserData.cs" />
     <Compile Include="DataAccessSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -30,19 +30,19 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.lblApplicationTypeID = new System.Windows.Forms.Label();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.tbApplicationTypeFees = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tbApplicationTypeTitle = new System.Windows.Forms.TextBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -68,17 +68,6 @@
             this.lblApplicationTypeID.TabIndex = 63;
             this.lblApplicationTypeID.Text = "???";
             // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = global::DVLD_Presentation_Layer.Properties.Resources.Number_32;
-            this.pictureBox2.Location = new System.Drawing.Point(75, 113);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(18, 13);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pictureBox2.TabIndex = 62;
-            this.pictureBox2.TabStop = false;
-            // 
             // tbApplicationTypeFees
             // 
             this.tbApplicationTypeFees.Location = new System.Drawing.Point(103, 110);
@@ -100,17 +89,6 @@
             this.label3.TabIndex = 61;
             this.label3.Text = "Fees:";
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::DVLD_Presentation_Layer.Properties.Resources.Number_32;
-            this.pictureBox1.Location = new System.Drawing.Point(75, 59);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(18, 13);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pictureBox1.TabIndex = 60;
-            this.pictureBox1.TabStop = false;
-            // 
             // tbApplicationTypeTitle
             // 
             this.tbApplicationTypeTitle.Location = new System.Drawing.Point(103, 84);
@@ -119,17 +97,6 @@
             this.tbApplicationTypeTitle.Size = new System.Drawing.Size(208, 20);
             this.tbApplicationTypeTitle.TabIndex = 52;
             this.tbApplicationTypeTitle.Tag = "Username";
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Image = global::DVLD_Presentation_Layer.Properties.Resources.Person_32;
-            this.pictureBox3.Location = new System.Drawing.Point(75, 85);
-            this.pictureBox3.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(18, 16);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox3.TabIndex = 59;
-            this.pictureBox3.TabStop = false;
             // 
             // label2
             // 
@@ -181,28 +148,61 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::DVLD_Presentation_Layer.Properties.Resources.Number_32;
+            this.pictureBox1.Location = new System.Drawing.Point(75, 59);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(18, 13);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBox1.TabIndex = 60;
+            this.pictureBox1.TabStop = false;
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Image = global::DVLD_Presentation_Layer.Properties.Resources.ApplicationTitle;
+            this.pictureBox4.Location = new System.Drawing.Point(75, 84);
+            this.pictureBox4.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(18, 19);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox4.TabIndex = 83;
+            this.pictureBox4.TabStop = false;
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Image = global::DVLD_Presentation_Layer.Properties.Resources.money_32;
+            this.pictureBox5.Location = new System.Drawing.Point(75, 111);
+            this.pictureBox5.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(18, 17);
+            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox5.TabIndex = 82;
+            this.pictureBox5.TabStop = false;
+            // 
             // frmEditApplicationType
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(325, 187);
+            this.Controls.Add(this.pictureBox4);
+            this.Controls.Add(this.pictureBox5);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.lblApplicationTypeID);
-            this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.tbApplicationTypeFees);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.tbApplicationTypeTitle);
-            this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label1);
             this.Name = "frmEditApplicationType";
             this.Text = "frmAddEditApplicationType";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -212,15 +212,15 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblApplicationTypeID;
-        private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.TextBox tbApplicationTypeFees;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.TextBox tbApplicationTypeTitle;
-        private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.PictureBox pictureBox4;
+        private System.Windows.Forms.PictureBox pictureBox5;
     }
 }

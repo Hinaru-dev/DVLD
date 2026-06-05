@@ -134,6 +134,7 @@
             this.tsmiManageTestTypes.Name = "tsmiManageTestTypes";
             this.tsmiManageTestTypes.Size = new System.Drawing.Size(230, 38);
             this.tsmiManageTestTypes.Text = "Manage Test Types";
+            this.tsmiManageTestTypes.Click += new System.EventHandler(this.tsmiManageTestTypes_Click);
             // 
             // tsmiPeople
             // 

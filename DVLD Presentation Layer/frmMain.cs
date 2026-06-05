@@ -82,5 +82,11 @@ namespace DVLD_Presentation_Layer
             frmManageApplicationTypes frmManageApplicationTypes = new frmManageApplicationTypes();
             frmManageApplicationTypes.ShowDialog();
         }
+
+        private void tsmiManageTestTypes_Click(object sender, EventArgs e)
+        {
+            frmManageTestTypes frmManageTestTypes = new frmManageTestTypes();
+            frmManageTestTypes.ShowDialog();
+        }
     }
 }
